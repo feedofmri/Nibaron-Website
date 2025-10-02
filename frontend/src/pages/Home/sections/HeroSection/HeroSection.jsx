@@ -87,7 +87,7 @@ const HeroSection = () => {
           <h2 className="hero-title bangla">স্মার্ট কৃষি বাজার</h2>
           <p className="hero-subtitle">
             AI-Powered Crop Predictions. Pre-Order Future Harvests.
-            Connect Directly with Verified Farmers.
+            Supported by NASA Satellite Dataset.
           </p>
         </motion.div>
 
