@@ -3,14 +3,6 @@
   <component name="CopilotDiffPersistence">
     <option name="pendingDiffs">
       <map>
-        <entry key="$PROJECT_DIR$/.gitattributes">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/.gitattributes" />
-              <option name="updatedContent" value="# Handle line endings automatically for files detected as text&#10;# and leave all files detected as binary untouched.&#10;* text=auto&#10;&#10;# The above will handle all files NOT listed below.&#10;# These files are text and should be normalized (Convert crlf =&gt; lf)&#10;*.css           text&#10;*.html          text&#10;*.js            text&#10;*.json          text&#10;*.jsx           text&#10;*.md            text&#10;*.php           text&#10;*.py            text&#10;*.rb            text&#10;*.sass          text&#10;*.scss          text&#10;*.sh            text&#10;*.sql           text&#10;*.txt           text&#10;*.xml           text&#10;*.yml           text&#10;*.yaml          text&#10;&#10;# These files are binary and should be left untouched&#10;# (binary is a macro for -text -diff)&#10;*.7z            binary&#10;*.dmg           binary&#10;*.gz            binary&#10;*.iso           binary&#10;*.jar           binary&#10;*.rar           binary&#10;*.tar           binary&#10;*.zip           binary&#10;*.png           binary&#10;*.jpg           binary&#10;*.jpeg          binary&#10;*.gif           binary&#10;*.ico           binary&#10;*.mov           binary&#10;*.mp4           binary&#10;*.mp3           binary&#10;*.flv           binary&#10;*.fla           binary&#10;*.swf           binary&#10;*.gz            binary&#10;*.zip           binary&#10;*.7z            binary&#10;*.ttf           binary&#10;*.eot           binary&#10;*.woff          binary&#10;*.pyc           binary&#10;*.pdf           binary&#10;*.ez            binary&#10;*.bz2           binary&#10;*.swp           binary&#10;*.webp          binary&#10;&#10;# Force batch scripts to always use CRLF line endings so that if a repo is accessed&#10;# in Windows via a file share from Linux, the scripts will work.&#10;*.{cmd,[cC][mM][dD]} text eol=crlf&#10;*.{bat,[bB][aA][tT]} text eol=crlf&#10;&#10;# Force bash scripts to always use LF line endings so that if a repo is accessed&#10;# in Unix via a file share from Windows, the scripts will work.&#10;*.sh text eol=lf" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/frontend/src/pages/Landing/sections/FeaturesSection/components/FloatingElements/FloatingElements.css">
           <value>
             <PendingDiffInfo>
