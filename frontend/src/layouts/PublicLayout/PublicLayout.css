@@ -1,0 +1,50 @@
+/* Public Layout Styles */
+.public-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+}
+
+.public-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+}
+
+/* Homepage specific override - no padding */
+.public-content.homepage-content {
+  padding-top: 0;
+}
+
+/* Ensure proper spacing after header */
+.public-content > * {
+  flex: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .public-content {
+    padding-top: 1rem;
+  }
+
+  .public-content.homepage-content {
+    padding-top: 0;
+  }
+}
+
+/* Landing page specific styles when used in public layout */
+.public-layout .landing-container {
+  padding-top: 0;
+}
+
+.public-layout .hero-section {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .public-layout .hero-section {
+    margin-top: 1rem;
+  }
+}

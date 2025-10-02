@@ -1,0 +1,54 @@
+/* Cursor Glow Animation Styles */
+.cursor-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(104, 145, 27, 0.15) 0%,
+    rgba(104, 145, 27, 0.08) 30%,
+    rgba(104, 145, 27, 0.02) 60%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease-out, transform 0.15s ease-out;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+}
+
+.cursor-glow.visible {
+  opacity: 1;
+}
+
+.cursor-glow.hidden {
+  opacity: 0;
+}
+
+/* Dark mode adjustments */
+.dark .cursor-glow {
+  background: radial-gradient(
+    circle,
+    rgba(104, 145, 27, 0.2) 0%,
+    rgba(104, 145, 27, 0.1) 30%,
+    rgba(104, 145, 27, 0.03) 60%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow {
+    transition: none;
+    opacity: 0 !important;
+  }
+}
+
+/* Hide on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-glow {
+    display: none;
+  }
+}

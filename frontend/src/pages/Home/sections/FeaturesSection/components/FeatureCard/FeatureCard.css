@@ -1,0 +1,138 @@
+/* Feature Card Styles */
+.feature-card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 24px;
+  background: var(--glass-light);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card--primary:hover {
+  box-shadow: 0 20px 40px rgba(104, 145, 27, 0.2);
+}
+
+.feature-card--accent:hover {
+  box-shadow: 0 20px 40px rgba(234, 176, 32, 0.2);
+}
+
+.feature-card--success:hover {
+  box-shadow: 0 20px 40px rgba(104, 145, 27, 0.2);
+}
+
+/* Content */
+.feature-card__content {
+  position: relative;
+  z-index: 2;
+}
+
+.feature-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, rgba(104, 145, 27, 0.1), rgba(234, 176, 32, 0.1));
+  color: var(--color-primary);
+}
+
+.feature-card--accent .feature-card__icon {
+  background: linear-gradient(135deg, rgba(234, 176, 32, 0.1), rgba(104, 145, 27, 0.1));
+  color: var(--color-accent);
+}
+
+.feature-card__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.feature-card__description {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Benefits List */
+.feature-card__benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-card__benefit {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.benefit-check {
+  color: var(--color-success);
+  flex-shrink: 0;
+}
+
+/* Glow Effect */
+.feature-card__glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(104, 145, 27, 0.1) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.feature-card:hover .feature-card__glow {
+  opacity: 1;
+}
+
+.feature-card--accent .feature-card__glow {
+  background: radial-gradient(
+    circle at center,
+    rgba(234, 176, 32, 0.1) 0%,
+    transparent 70%
+  );
+}
+
+/* Dark mode adjustments */
+.dark .feature-card {
+  background: var(--glass-dark);
+  border-color: var(--glass-border-dark);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .feature-card {
+    padding: 1.5rem;
+  }
+
+  .feature-card__icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .feature-card__title {
+    font-size: 1.25rem;
+  }
+}

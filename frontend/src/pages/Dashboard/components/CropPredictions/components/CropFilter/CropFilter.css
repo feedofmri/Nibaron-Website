@@ -1,0 +1,26 @@
+.crop-filter-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.crop-filter-select:hover {
+  border-color: #059669;
+}
+
+.crop-filter-select:focus {
+  outline: none;
+  border-color: #059669;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+.crop-filter-select option {
+  padding: 8px;
+  font-size: 0.875rem;
+}

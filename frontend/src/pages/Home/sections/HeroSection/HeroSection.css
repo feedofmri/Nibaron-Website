@@ -1,0 +1,296 @@
+/* Hero Section Styles */
+.hero-section {
+  position: relative;
+  min-height: calc(100vh + 50px); /* Make it larger than viewport height */
+  height: 100vh; /* Ensure it takes full viewport height */
+  margin: 0;
+  padding-top: 70px; /* Simple padding for header height */
+  padding-bottom: 50px; /* Add bottom padding to push next section down */
+  display: flex;
+  align-items: center; /* Back to center alignment */
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fafaf6 0%, #f0f9e8 100%);
+  /* Fix scroll-related animation issues */
+  transform: translateZ(0); /* Force hardware acceleration */
+  will-change: auto; /* Optimize performance */
+  isolation: isolate; /* Create new stacking context */
+}
+
+/* Background Effects */
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* Prevent background from moving during scroll */
+  transform: translateZ(0);
+  will-change: auto;
+}
+
+.gradient-mesh {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 20% 80%,
+    rgba(104, 145, 27, 0.1) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    ellipse at 80% 20%,
+    rgba(234, 176, 32, 0.08) 0%,
+    transparent 50%
+  );
+}
+
+.grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(104, 145, 27, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(104, 145, 27, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Hero Content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 2rem 2rem 0 2rem; /* Reduced top padding */
+  /* Removed margin-top: auto and margin-bottom: auto */
+}
+
+/* Logo Animation */
+.hero-logo {
+  margin-bottom: 2rem;
+}
+
+.logo-text {
+  font-size: 2rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #68911b, #eab020);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.logo-letter {
+  display: inline-block;
+}
+
+/* Headlines */
+.hero-headlines {
+  margin-bottom: 3rem;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.hero-title.bangla {
+  font-family: 'Noto Sans Bengali', sans-serif;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Trust Indicators */
+.trust-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.trust-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.trust-label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.trust-divider {
+  color: var(--color-text-secondary);
+  opacity: 0.5;
+}
+
+/* CTA Buttons - Fix for line wrapping */
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap; /* Prevent wrapping */
+}
+
+.cta-buttons .btn-primary,
+.cta-buttons .btn-outline,
+.cta-buttons .cta-primary,
+.cta-buttons .cta-secondary {
+  white-space: nowrap !important; /* Prevent text wrapping */
+  min-width: fit-content;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Specific fix for View Pre-Orders button */
+.cta-buttons .btn-outline span,
+.cta-buttons .cta-secondary span {
+  white-space: nowrap !important;
+}
+
+/* Scroll Indicator Styles */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scroll-button {
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(104, 145, 27, 0.2);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--color-primary);
+}
+
+.scroll-button:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(104, 145, 27, 0.15);
+}
+
+.scroll-text {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section {
+    margin-top: -65px !important; /* Match mobile header negative margin */
+    padding-top: 130px !important; /* Double mobile header height */
+    padding-bottom: 2rem;
+  }
+
+  .trust-indicators {
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .trust-item {
+    min-width: 80px;
+  }
+
+  .trust-divider {
+    display: none;
+  }
+
+  .scroll-indicator {
+    bottom: 1.5rem;
+  }
+
+  .scroll-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .scroll-text {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    margin-top: -60px !important; /* Match smallest mobile header negative margin */
+    padding-top: 120px !important; /* Double smallest header height */
+    padding-bottom: 2rem;
+  }
+
+  .scroll-indicator {
+    bottom: 1rem;
+  }
+
+  .scroll-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .scroll-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* Animations */
+/* @keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+} */
+
+/* Remove problematic floating animations that interfere with scroll */
+/* .hero-content > * {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+.hero-content > *:nth-child(2) {
+  animation-delay: -2s;
+}
+
+.hero-content > *:nth-child(3) {
+  animation-delay: -4s;
+} */
+
+/* Add scroll optimization for all animated elements */
+.hero-content,
+.hero-logo,
+.hero-headlines,
+.trust-indicators,
+.cta-buttons {
+  transform: translateZ(0);
+  will-change: auto;
+  backface-visibility: hidden;
+}

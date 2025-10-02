@@ -1,0 +1,68 @@
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: #f3f4f6;
+}
+
+.toggle-track {
+  width: 48px;
+  height: 24px;
+  background: #e5e7eb;
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.toggle-thumb.light {
+  left: 2px;
+  background: #f59e0b;
+  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+}
+
+.toggle-thumb.dark {
+  left: 26px;
+  background: #6366f1;
+  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+}
+
+.toggle-thumb.dark ~ .toggle-track {
+  background: #374151;
+}
+
+/* Dark mode support */
+[data-theme="dark"] .toggle-track {
+  background: #374151;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background: #374151;
+}
+
+/* Animation for smooth transitions */
+.toggle-thumb svg {
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle:active .toggle-thumb svg {
+  transform: scale(0.9);
+}

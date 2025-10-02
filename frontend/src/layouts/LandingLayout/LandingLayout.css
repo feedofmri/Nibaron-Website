@@ -1,0 +1,46 @@
+/* Home Layout Styles */
+.landing-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-main {
+  flex: 1;
+  padding-top: 80px; /* Account for fixed header */
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Section spacing */
+.landing-main section {
+  padding: 4rem 0;
+}
+
+.landing-main section:first-child {
+  padding-top: 0;
+}
+
+/* Container for consistent spacing */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .landing-main {
+    padding-top: 64px;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .landing-main section {
+    padding: 2rem 0;
+  }
+}

@@ -1,0 +1,477 @@
+/* Auth Page Layout - Split Screen Design */
+.auth-page {
+  min-height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Left Side - Branding (Desktop Only) - FIXED HEIGHT, NO SCROLL */
+.auth-branding {
+  flex: 1;
+  background: linear-gradient(135deg, #68911b 0%, #5a7b17 100%);
+  position: relative;
+  display: none;
+  overflow: hidden; /* Prevent any scrolling */
+  height: 100vh; /* Fixed viewport height */
+}
+
+.auth-branding::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  background-size: 400px 400px, 600px 600px;
+}
+
+.branding-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Keep content left-aligned */
+  padding: 3rem; /* Restored padding for better spacing */
+  color: white;
+  overflow: hidden; /* Ensure no scroll */
+  text-align: left; /* Ensure all text stays left-aligned */
+}
+
+.logo-section {
+  margin-bottom: 2rem; /* Better spacing */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem; /* Reduced margin */
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.branding-title {
+  font-size: 2.5rem; /* Consistent with signup */
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.branding-subtitle {
+  font-size: 1.125rem; /* Consistent with signup */
+  opacity: 0.9;
+  line-height: 1.5;
+  max-width: 400px; /* Increased for better readability */
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem; /* Reduced gap for tighter layout */
+  margin: 2.5rem 0 0 0; /* Only top margin, consistent with signup */
+  width: 100%; /* Ensure full width */
+  align-self: flex-start; /* Maintain left alignment within centered container */
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.75rem;
+  padding: 1rem 0.75rem; /* Compact padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card svg {
+  color: rgba(255, 255, 255, 0.9);
+  flex-shrink: 0;
+}
+
+.feature-card h3 {
+  font-size: 0.875rem; /* Smaller, more compact text */
+  font-weight: 600;
+  margin: 0;
+  color: white;
+  line-height: 1.2;
+}
+
+/* Right Side - Form Container - SCROLLABLE AREA */
+.auth-form-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: var(--color-background, #ffffff);
+  position: relative;
+  height: 100vh; /* Fixed viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 2rem 1rem; /* Adjusted padding */
+}
+
+.auth-form-container::before {
+  content: '';
+  position: fixed; /* Changed to fixed so it doesn't scroll */
+  top: 0;
+  left: 50%; /* Position on right half only */
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(104, 145, 27, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(104, 145, 27, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.auth-form-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--color-background-card, #ffffff);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-border, #e5e7eb);
+  position: relative;
+  z-index: 2;
+  margin-top: 2rem; /* Add top margin for better spacing */
+  margin-bottom: 2rem; /* Add bottom margin for scrolling space */
+}
+
+/* Mobile Logo */
+.mobile-logo {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary, #68911b);
+}
+
+.mobile-logo svg {
+  color: var(--color-primary, #68911b);
+}
+
+/* Form Header */
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #111827);
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  color: var(--color-text-secondary, #6b7280);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Form Styles */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--color-text-primary, #111827);
+  font-size: 0.875rem;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 3rem;
+  border: 2px solid var(--color-border, #e5e7eb);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  background: var(--color-background, #ffffff);
+  color: var(--color-text-primary, #111827);
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary, #68911b);
+  box-shadow: 0 0 0 3px rgba(104, 145, 27, 0.1);
+}
+
+.form-input.error {
+  border-color: var(--color-error, #ef4444);
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--color-text-secondary, #6b7280);
+  z-index: 1;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--color-text-secondary, #6b7280);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: var(--color-text-primary, #111827);
+  background: var(--color-background-secondary, #f9fafb);
+}
+
+.error-message {
+  color: var(--color-error, #ef4444);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Form Options */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #6b7280);
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary, #68911b);
+}
+
+.forgot-link {
+  color: var(--color-primary, #68911b);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Auth Button */
+.auth-button {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.875rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Social Login */
+.social-login {
+  margin-top: 1.5rem;
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--color-text-secondary, #6b7280);
+  font-size: 0.875rem;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-border, #e5e7eb);
+}
+
+.divider span {
+  background: var(--color-background-card, #ffffff);
+  padding: 0 1rem;
+}
+
+.google-button {
+  width: 100%;
+}
+
+/* Auth Footer */
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #6b7280);
+}
+
+.auth-link {
+  color: var(--color-primary, #68911b);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* Signup Specific Styles - ENHANCED FOR SCROLLING */
+.signup-container {
+  padding: 1rem; /* Reduced padding */
+}
+
+.signup-card {
+  max-width: 600px !important;
+  margin-top: 1rem !important; /* Reduced top margin */
+  margin-bottom: 3rem !important; /* Ensure scrolling space at bottom */
+}
+
+/* Desktop Responsive - CRITICAL FIX */
+@media (min-width: 1024px) {
+  .auth-branding {
+    display: flex !important;
+    min-width: 45%;
+  }
+
+  .auth-form-container {
+    flex: 1;
+    max-width: 55%;
+    min-width: 550px;
+  }
+
+  /* Signup specific adjustments for desktop */
+  .signup-card {
+    max-width: 700px !important;
+  }
+
+  .auth-form-container.signup-container .auth-form-card {
+    max-width: 700px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .branding-content {
+    padding: 4rem; /* Balanced padding for larger screens */
+  }
+
+  .branding-title {
+    font-size: 3rem; /* Larger on big screens */
+  }
+
+  .auth-branding {
+    min-width: 50%;
+  }
+
+  .auth-form-container {
+    max-width: 50%;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1023px) {
+  .auth-page {
+    display: block;
+    max-height: none; /* Remove height constraint on mobile */
+  }
+
+  .auth-form-container {
+    min-height: 100vh;
+    height: auto; /* Auto height on mobile */
+    padding: 1.5rem;
+    overflow-y: visible; /* Normal scroll behavior on mobile */
+  }
+
+  .mobile-logo {
+    display: flex;
+  }
+
+  .auth-form-card {
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-top: 0; /* Remove extra margins on mobile */
+    margin-bottom: 0;
+  }
+
+  .form-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-form-container {
+    padding: 1rem;
+  }
+
+  .auth-form-card {
+    padding: 1.5rem;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .form-input {
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+  }
+}
+
+/* Dark Mode Adjustments */
+.dark .auth-branding {
+  background: linear-gradient(135deg, #2a3f0f 0%, #1f2e0a 100%);
+}
+
+.dark .form-input {
+  background: var(--color-background-secondary, #374151);
+}
+
+.dark .testimonial {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}

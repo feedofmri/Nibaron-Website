@@ -1,0 +1,77 @@
+/* Floating Elements Background Animation Styles */
+.floating-elements-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.floating-element {
+  position: absolute;
+  user-select: none;
+  color: var(--color-primary);
+  filter: blur(0.5px);
+  will-change: transform;
+}
+
+/* Gradient mesh background */
+.gradient-mesh {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(104, 145, 27, 0.03) 0%,
+    rgba(234, 176, 32, 0.02) 50%,
+    rgba(104, 145, 27, 0.03) 100%
+  );
+}
+
+.dark .gradient-mesh {
+  background: linear-gradient(
+    135deg,
+    rgba(104, 145, 27, 0.05) 0%,
+    rgba(234, 176, 32, 0.03) 50%,
+    rgba(104, 145, 27, 0.05) 100%
+  );
+}
+
+/* Grid pattern overlay */
+.grid-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(104, 145, 27, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(104, 145, 27, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dark .grid-pattern {
+  background-image:
+    linear-gradient(rgba(104, 145, 27, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(104, 145, 27, 0.04) 1px, transparent 1px);
+}
+
+/* Hide floating elements on small screens for performance */
+@media (max-width: 768px) {
+  .floating-elements-container {
+    display: none;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .floating-element {
+    animation: none !important;
+    transform: none !important;
+  }
+}

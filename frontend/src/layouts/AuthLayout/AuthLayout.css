@@ -1,0 +1,128 @@
+/* Auth Layout Styles - Updated for Full Width Split Screen */
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  /* Remove centering constraints to allow full width */
+}
+
+.dark .auth-layout {
+  background: transparent; /* Let individual auth pages control their backgrounds */
+}
+
+.auth-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  /* Remove all constraints to allow full width */
+}
+
+.auth-container {
+  width: 100%;
+  height: 100%;
+  /* Remove max-width constraint that was forcing narrow layout */
+}
+
+/* Ensure auth pages can use full screen */
+.auth-container > * {
+  width: 100%;
+  height: 100%;
+}
+
+/* Auth Background Styles - Fixed */
+.auth-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.auth-grid-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(104, 145, 27, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(104, 145, 27, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.auth-floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.auth-floating-element {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0.1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  color: var(--color-primary, #68911b);
+}
+
+.dark .auth-floating-element {
+  opacity: 0.05;
+}
+
+.auth-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.1) 100%);
+  pointer-events: none;
+}
+
+.dark .auth-gradient-overlay {
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+/* Mobile responsiveness - only apply constraints on mobile */
+@media (max-width: 1023px) {
+  .auth-layout {
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fafaf6 0%, #f0f9e8 100%);
+  }
+
+  .dark .auth-layout {
+    background: linear-gradient(135deg, #2a2e34 0%, #1f2329 100%);
+  }
+
+  .auth-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .auth-container {
+    max-width: 440px;
+    height: auto;
+  }
+
+  .auth-container > * {
+    height: auto;
+  }
+
+  /* Hide floating elements on mobile for better performance */
+  .auth-floating-elements {
+    display: none;
+  }
+}

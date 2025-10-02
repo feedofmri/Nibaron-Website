@@ -1,0 +1,71 @@
+.messages-icon {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.messages-icon:hover {
+  background: #f3f4f6;
+}
+
+.messages-icon:active {
+  transform: scale(0.95);
+}
+
+.messages-icon.animating .message-icon-wrapper {
+  animation: messagesBounce 0.2s ease-in-out;
+}
+
+.message-icon-wrapper {
+  position: relative;
+  color: #6b7280;
+  transition: color 0.2s ease;
+}
+
+.messages-icon:hover .message-icon-wrapper {
+  color: #3b82f6;
+}
+
+.message-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #3b82f6;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 600;
+  padding: 2px 5px;
+  border-radius: 10px;
+  min-width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+@keyframes messagesBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Dark mode support */
+[data-theme="dark"] .message-icon-wrapper {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .messages-icon:hover {
+  background: #374151;
+}
+
+[data-theme="dark"] .messages-icon:hover .message-icon-wrapper {
+  color: #60a5fa;
+}

@@ -1,0 +1,189 @@
+/* Floating Elements Styles */
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-element {
+  position: absolute;
+  z-index: 2;
+}
+
+.element-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  animation: float var(--element-delay, 0s) infinite;
+}
+
+.element-icon:hover {
+  transform: scale(1.1);
+}
+
+.element-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* Background Shapes */
+.background-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.shape-1 {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  top: 15%;
+  right: 20%;
+}
+
+.shape-2 {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  bottom: 20%;
+  left: 25%;
+}
+
+.shape-3 {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  top: 50%;
+  right: 10%;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-2deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+.element-pulse {
+  animation: pulse 3s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .element-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .shape-1 {
+    width: 100px;
+    height: 100px;
+  }
+
+  .shape-2 {
+    width: 70px;
+    height: 70px;
+  }
+
+  .shape-3 {
+    width: 85px;
+    height: 85px;
+  }
+}
+
+@media (max-width: 768px) {
+  .element-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .shape-1 {
+    width: 80px;
+    height: 80px;
+  }
+
+  .shape-2 {
+    width: 60px;
+    height: 60px;
+  }
+
+  .shape-3 {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-elements {
+    display: none; /* Hide floating elements on very small screens for performance */
+  }
+}
+
+/* Additional visual effects */
+.floating-element::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: radial-gradient(circle, currentColor 0%, transparent 70%);
+  opacity: 0.05;
+  border-radius: 50%;
+  animation: glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    opacity: 0.03;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 0.08;
+    transform: scale(1.2);
+  }
+}
