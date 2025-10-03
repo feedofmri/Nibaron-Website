@@ -1,11 +1,25 @@
-# Nibaron — ClimateAI for Farmers 🌱
+<div align="center">
+  <img src="frontend/src/assets/images/nibaron_icon.png" alt="Nibaron Logo" width="120" height="120" />
+</div>
 
-**Tagline:** *Predict. Prevent. Protect.*
+<div align="center">
+
+# Nibaron — ClimateAI for Farmers
+
+</div>
+<div align="center">
+
+*Predict. Prevent. Protect.*
+
+</div>
+<div align="center">
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![Laravel](https://img.shields.io/badge/Laravel-12.x-red.svg)
 ![React](https://img.shields.io/badge/React-18.x-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
+
+</div>
 
 ## 🌾 Overview
 
@@ -503,4 +517,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Made with ❤️ for farmers worldwide**
 
 *Nibaron — Empowering farmers with climate intelligence to build a more resilient agricultural future.*
-
