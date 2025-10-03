@@ -44,30 +44,47 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progre
 # Copy application files
 COPY . .
 
-# Set proper permissions
-RUN chown -R www-data:www-data /var/www/html \
+# Create necessary directories and set proper permissions
+RUN mkdir -p /var/www/html/storage/logs \
+    && mkdir -p /var/www/html/storage/framework/cache \
+    && mkdir -p /var/www/html/storage/framework/sessions \
+    && mkdir -p /var/www/html/storage/framework/views \
+    && mkdir -p /var/www/html/bootstrap/cache \
+    && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
 
 # Configure Apache
 RUN a2enmod rewrite
 
-# Create Apache configuration
+# Create Apache configuration with proper error handling
 RUN echo '<VirtualHost *:80>\n\
     DocumentRoot /var/www/html/public\n\
     <Directory /var/www/html/public>\n\
         AllowOverride All\n\
         Require all granted\n\
+        Options -Indexes +FollowSymLinks\n\
+    </Directory>\n\
+    <Directory /var/www/html>\n\
+        Options -Indexes\n\
     </Directory>\n\
     ErrorLog ${APACHE_LOG_DIR}/error.log\n\
     CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
+    LogLevel warn\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
 # Make startup script executable
 RUN chmod +x /var/www/html/docker/entrypoint.sh
 
+# Set environment variable for Apache
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+
 # Expose port
 EXPOSE 80
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost/ || exit 1
 
 # Use custom entrypoint
 CMD ["/var/www/html/docker/entrypoint.sh"]
