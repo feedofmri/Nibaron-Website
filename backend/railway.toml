@@ -6,13 +6,13 @@ builder = "dockerfile"
 
 # Deploy Configuration
 [deploy]
-healthcheckPath = "/health"
+healthcheckPath = "/health.php"
 healthcheckTimeout = 60
 restartPolicyType = "on_failure"
 
 # Health Check
 [healthcheck]
-path = "/health"
+path = "/health.php"
 timeout = 30
 interval = 30
 

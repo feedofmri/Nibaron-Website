@@ -82,9 +82,9 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 # Expose port
 EXPOSE 80
 
-# Health check using the new endpoint with longer startup period
+# Health check using the simple PHP file with longer startup period
 HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
-    CMD curl -f http://localhost/health || exit 1
+    CMD curl -f http://localhost/health.php || exit 1
 
 # Use custom entrypoint
 CMD ["/var/www/html/docker/entrypoint.sh"]

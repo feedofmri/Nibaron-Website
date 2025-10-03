@@ -3,51 +3,42 @@ set -e
 
 echo "Starting Laravel application setup..."
 
-# Start Apache in background first to respond to health checks
-echo "Starting Apache in background..."
-apache2-foreground &
-APACHE_PID=$!
+# Start Apache immediately to handle health checks
+echo "Starting Apache..."
+service apache2 start
 
-# Generate APP_KEY if not set
+# Generate APP_KEY if not set (but don't fail if it can't)
 if [ -z "$APP_KEY" ]; then
     echo "Generating application key..."
-    php artisan key:generate --force
+    php artisan key:generate --force || echo "Warning: Could not generate APP_KEY"
 fi
 
-# Wait for database to be ready (with retry logic) - but don't block Apache
-echo "Checking database connection..."
-DATABASE_READY=false
-for i in {1..30}; do
-    if php artisan migrate:status > /dev/null 2>&1; then
-        echo "Database connection successful"
-        DATABASE_READY=true
-        break
+# Try Laravel setup but don't fail the container if it fails
+echo "Setting up Laravel (non-blocking)..."
+(
+    # Wait for database with shorter timeout
+    echo "Checking database connection..."
+    for i in {1..10}; do
+        if php artisan migrate:status > /dev/null 2>&1; then
+            echo "Database connection successful"
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            php artisan storage:link || true
+            echo "Laravel setup complete."
+            break
+        fi
+        echo "Database not ready, waiting... (attempt $i/10)"
+        sleep 3
+    done
+
+    if [ $i -eq 10 ]; then
+        echo "Warning: Database not available, Laravel setup skipped"
     fi
-    echo "Database not ready, waiting... (attempt $i/30)"
-    sleep 2
-done
+) &
 
-# Only run migrations if database is ready
-if [ "$DATABASE_READY" = true ]; then
-    echo "Running database migrations..."
-    php artisan migrate --force
+echo "Apache is running. Health check endpoint available at /health.php"
 
-    # Clear and cache configuration for production
-    echo "Optimizing Laravel for production..."
-    php artisan config:clear
-    php artisan config:cache
-    php artisan route:cache
-    php artisan view:cache
-
-    # Create symlink for storage
-    php artisan storage:link || true
-
-    echo "Laravel optimization complete."
-else
-    echo "Warning: Database not available, skipping migrations and caching"
-fi
-
-echo "Setup complete. Apache is running with PID $APACHE_PID"
-
-# Wait for Apache process
-wait $APACHE_PID
+# Keep Apache running in foreground
+apache2-foreground
