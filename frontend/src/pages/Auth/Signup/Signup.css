@@ -56,6 +56,26 @@
   font-weight: 700;
 }
 
+.logo .logo-image,
+.mobile-logo .logo-image {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.mobile-logo .logo-image {
+  width: 24px;
+  height: 24px;
+}
+
+/* Ensure logo images are properly aligned */
+.logo,
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .branding-title {
   font-size: 2.25rem; /* Smaller to fit better */
   font-weight: 800;
@@ -411,6 +431,27 @@
 
 .checkbox-text {
   flex: 1;
+}
+
+/* Logo Image Styling */
+.logo .logo-image,
+.mobile-logo .logo-image {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.mobile-logo .logo-image {
+  width: 24px;
+  height: 24px;
+}
+
+/* Ensure logo images are properly aligned */
+.logo,
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 /* Signup Branding Specific - SAME GREEN THEME AS LOGIN */

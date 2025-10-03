@@ -1,4 +1,4 @@
-/* Auth Page Layout - Split Screen Design */
+/* Auth Page Layout - Split Screen Design (Shared with Signup) */
 .auth-page {
   min-height: 100vh;
   max-height: 100vh;
@@ -44,47 +44,48 @@
 }
 
 .logo-section {
-  margin-bottom: 2rem; /* Better spacing */
+  margin-bottom: 1.5rem; /* Reduced margin */
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1.5rem; /* Reduced margin */
+  margin-bottom: 1.25rem; /* Reduced margin */
   font-size: 1.5rem;
   font-weight: 700;
 }
 
 .branding-title {
-  font-size: 2.5rem; /* Consistent with signup */
+  font-size: 2.25rem; /* Smaller to fit better */
   font-weight: 800;
   line-height: 1.1;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem; /* Reduced margin */
 }
 
 .branding-subtitle {
-  font-size: 1.125rem; /* Consistent with signup */
+  font-size: 1rem; /* Smaller text */
   opacity: 0.9;
   line-height: 1.5;
-  max-width: 400px; /* Increased for better readability */
+  max-width: 350px; /* Reduced width */
 }
 
-.features-grid {
+/* Login Benefits Section */
+.login-benefits {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem; /* Reduced gap for tighter layout */
-  margin: 2.5rem 0 0 0; /* Only top margin, consistent with signup */
-  width: 100%; /* Ensure full width */
-  align-self: flex-start; /* Maintain left alignment within centered container */
+  gap: 0.75rem;
+  margin: 2.5rem 0 0 0;
+  width: 100%;
+  align-self: flex-start;
 }
 
-.feature-card {
+.benefit-card {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 0.75rem;
-  padding: 1rem 0.75rem; /* Compact padding */
+  padding: 1rem 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,19 +94,19 @@
   transition: all 0.3s ease;
 }
 
-.feature-card:hover {
+.benefit-card:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.feature-card svg {
+.benefit-card svg {
   color: rgba(255, 255, 255, 0.9);
   flex-shrink: 0;
 }
 
-.feature-card h3 {
-  font-size: 0.875rem; /* Smaller, more compact text */
+.benefit-card h3 {
+  font-size: 0.875rem;
   font-weight: 600;
   margin: 0;
   color: white;
@@ -116,13 +117,13 @@
 .auth-form-container {
   flex: 1;
   display: flex;
-  align-items: flex-start;
+  align-items: center; /* Center for login since it's shorter */
   justify-content: center;
   background: var(--color-background, #ffffff);
   position: relative;
   height: 100vh; /* Fixed viewport height */
   overflow-y: auto; /* Enable vertical scrolling */
-  padding: 2rem 1rem; /* Adjusted padding */
+  padding: 1rem; /* Reduced padding for more space */
 }
 
 .auth-form-container::before {
@@ -149,8 +150,16 @@
   border: 1px solid var(--color-border, #e5e7eb);
   position: relative;
   z-index: 2;
-  margin-top: 2rem; /* Add top margin for better spacing */
-  margin-bottom: 2rem; /* Add bottom margin for scrolling space */
+}
+
+/* Login specific container adjustments */
+.login-container {
+  align-items: center; /* Center the login form vertically */
+}
+
+.login-card {
+  margin-top: 0; /* No top margin for centered positioning */
+  margin-bottom: 0; /* No bottom margin for centered positioning */
 }
 
 /* Mobile Logo */
@@ -162,10 +171,6 @@
   margin-bottom: 2rem;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-primary, #68911b);
-}
-
-.mobile-logo svg {
   color: var(--color-primary, #68911b);
 }
 
@@ -188,13 +193,14 @@
   line-height: 1.5;
 }
 
-/* Form Styles */
+/* Login Form */
 .login-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
+/* Form Styles */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -264,7 +270,7 @@
   margin-top: 0.25rem;
 }
 
-/* Form Options */
+/* Form Options - Remember Me & Forgot Password */
 .form-options {
   display: flex;
   justify-content: space-between;
@@ -279,27 +285,23 @@
   font-size: 0.875rem;
   color: var(--color-text-secondary, #6b7280);
   cursor: pointer;
+  line-height: 1.5;
 }
 
 .checkbox {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   accent-color: var(--color-primary, #68911b);
 }
 
-.forgot-link {
-  color: var(--color-primary, #68911b);
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: color 0.2s ease;
+.checkmark {
+  display: none;
 }
 
-.forgot-link:hover {
-  text-decoration: underline;
+.checkbox-text {
+  user-select: none;
 }
 
-/* Auth Button */
 .auth-button {
   width: 100%;
   margin-top: 0.5rem;
@@ -308,39 +310,6 @@
   font-weight: 600;
 }
 
-/* Social Login */
-.social-login {
-  margin-top: 1.5rem;
-}
-
-.divider {
-  position: relative;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: var(--color-text-secondary, #6b7280);
-  font-size: 0.875rem;
-}
-
-.divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--color-border, #e5e7eb);
-}
-
-.divider span {
-  background: var(--color-background-card, #ffffff);
-  padding: 0 1rem;
-}
-
-.google-button {
-  width: 100%;
-}
-
-/* Auth Footer */
 .auth-footer {
   text-align: center;
   margin-top: 1.5rem;
@@ -359,106 +328,105 @@
   text-decoration: underline;
 }
 
-/* Signup Specific Styles - ENHANCED FOR SCROLLING */
-.signup-container {
-  padding: 1rem; /* Reduced padding */
+/* Logo Image Styling */
+.logo .nibaron-logo,
+.mobile-logo .nibaron-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
-.signup-card {
-  max-width: 600px !important;
-  margin-top: 1rem !important; /* Reduced top margin */
-  margin-bottom: 3rem !important; /* Ensure scrolling space at bottom */
+.mobile-logo .nibaron-logo {
+  width: 24px;
+  height: 24px;
 }
 
-/* Desktop Responsive - CRITICAL FIX */
+/* Ensure logo images are properly aligned */
+.logo,
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Login Branding Specific - Same green theme as signup */
+.login-branding {
+  background: linear-gradient(135deg, #68911b 0%, #5a7b17 100%);
+}
+
+/* Desktop Responsive - Show left panel */
 @media (min-width: 1024px) {
   .auth-branding {
     display: flex !important;
-    min-width: 45%;
+    min-width: 42%;
   }
 
   .auth-form-container {
     flex: 1;
-    max-width: 55%;
-    min-width: 550px;
-  }
-
-  /* Signup specific adjustments for desktop */
-  .signup-card {
-    max-width: 700px !important;
-  }
-
-  .auth-form-container.signup-container .auth-form-card {
-    max-width: 700px;
+    max-width: 58%;
+    min-width: 450px;
   }
 }
 
-@media (min-width: 1200px) {
-  .branding-content {
-    padding: 4rem; /* Balanced padding for larger screens */
-  }
-
-  .branding-title {
-    font-size: 3rem; /* Larger on big screens */
-  }
-
-  .auth-branding {
-    min-width: 50%;
-  }
-
-  .auth-form-container {
-    max-width: 50%;
-  }
-}
-
-/* Mobile Responsiveness */
+/* Tablet Responsive */
 @media (max-width: 1023px) {
-  .auth-page {
-    display: block;
-    max-height: none; /* Remove height constraint on mobile */
-  }
-
-  .auth-form-container {
-    min-height: 100vh;
-    height: auto; /* Auto height on mobile */
-    padding: 1.5rem;
-    overflow-y: visible; /* Normal scroll behavior on mobile */
+  .auth-branding {
+    display: none;
   }
 
   .mobile-logo {
     display: flex;
   }
 
+  .auth-form-container {
+    width: 100%;
+    padding: 1rem;
+  }
+
   .auth-form-card {
+    max-width: 400px;
     padding: 2rem;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .auth-form-container {
+    padding: 0.5rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+
+  .auth-form-card {
+    padding: 1.5rem;
     border-radius: 1rem;
-    margin-top: 0; /* Remove extra margins on mobile */
-    margin-bottom: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
   .form-title {
     font-size: 1.75rem;
   }
-}
-
-@media (max-width: 480px) {
-  .auth-form-container {
-    padding: 1rem;
-  }
-
-  .auth-form-card {
-    padding: 1.5rem;
-    box-shadow: none;
-    border: none;
-    background: transparent;
-  }
-
-  .form-title {
-    font-size: 1.5rem;
-  }
 
   .form-input {
-    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    padding: 0.75rem 0.875rem 0.75rem 2.75rem;
+  }
+
+  .input-icon {
+    left: 0.875rem;
+  }
+
+  .password-toggle {
+    right: 0.875rem;
+  }
+
+  .form-options {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .checkbox-container {
+    justify-content: flex-start;
   }
 }
 

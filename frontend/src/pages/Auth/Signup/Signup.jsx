@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Eye, EyeOff, User, Building2, Phone, MapPin, ArrowRight, Leaf, Truck, Store, Globe, Shield, Clock, CheckCircle } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, User, Building2, Phone, MapPin, ArrowRight, Truck, Store, Globe, Shield, Clock, CheckCircle } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Button from '../../../components/common/Button/Button';
 import toast from 'react-hot-toast';
+import nibaronIconWhite from '../../../assets/images/nibaron_icon_white.png';
 import './Signup.css';
 
 const signupSchema = yup.object({
@@ -146,7 +147,7 @@ const Signup = () => {
             className="logo-section"
           >
             <div className="logo">
-              <Leaf size={32} />
+              <img src={nibaronIconWhite} alt="Nibaron Logo" className="logo-image" />
               <span>Nibaron</span>
             </div>
             <h1 className="branding-title">
@@ -190,7 +191,7 @@ const Signup = () => {
         >
           {/* Mobile Logo */}
           <div className="mobile-logo">
-            <Leaf size={24} />
+            <img src={nibaronIconWhite} alt="Nibaron Logo" className="logo-image" />
             <span>Nibaron</span>
           </div>
 
@@ -210,7 +211,6 @@ const Signup = () => {
                 <div className="form-group">
                   <label htmlFor="name" className="form-label">Full Name</label>
                   <div className="input-container">
-                    <User className="input-icon" size={20} />
                     <input
                       {...register('name')}
                       type="text"
@@ -225,7 +225,6 @@ const Signup = () => {
                 <div className="form-group">
                   <label htmlFor="email" className="form-label">Email Address</label>
                   <div className="input-container">
-                    <Mail className="input-icon" size={20} />
                     <input
                       {...register('email')}
                       type="email"
@@ -240,7 +239,6 @@ const Signup = () => {
                 <div className="form-group">
                   <label htmlFor="phone" className="form-label">Phone Number</label>
                   <div className="input-container">
-                    <Phone className="input-icon" size={20} />
                     <input
                       {...register('phone')}
                       type="tel"
@@ -304,7 +302,6 @@ const Signup = () => {
                 <div className="form-group full-width">
                   <label htmlFor="businessName" className="form-label">Business Name</label>
                   <div className="input-container">
-                    <Building2 className="input-icon" size={20} />
                     <input
                       {...register('businessName')}
                       type="text"
@@ -319,7 +316,6 @@ const Signup = () => {
                 <div className="form-group full-width">
                   <label htmlFor="address" className="form-label">Business Address</label>
                   <div className="input-container">
-                    <MapPin className="input-icon" size={20} />
                     <textarea
                       {...register('address')}
                       id="address"
@@ -340,7 +336,6 @@ const Signup = () => {
                 <div className="form-group">
                   <label htmlFor="password" className="form-label">Password</label>
                   <div className="input-container">
-                    <Lock className="input-icon" size={20} />
                     <input
                       {...register('password')}
                       type={showPassword ? 'text' : 'password'}
@@ -362,7 +357,6 @@ const Signup = () => {
                 <div className="form-group">
                   <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
                   <div className="input-container">
-                    <Lock className="input-icon" size={20} />
                     <input
                       {...register('confirmPassword')}
                       type={showConfirmPassword ? 'text' : 'password'}

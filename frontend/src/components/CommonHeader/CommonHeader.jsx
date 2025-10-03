@@ -246,17 +246,6 @@ const CommonHeader = () => {
             </>
           ) : (
             <>
-              {/* Cart for logged-out users */}
-              <div className="cart-container">
-                <button
-                  className="action-btn cart-btn"
-                  onClick={() => navigate('/login')}
-                  title="Sign in to view cart"
-                >
-                  <ShoppingCart size={20} />
-                </button>
-              </div>
-
               {/* Auth Buttons for logged-out users */}
               <button
                 className="auth-btn signin-btn"

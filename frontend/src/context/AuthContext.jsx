@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { authService } from '../services/auth/authService';
 import { tokenService } from '../services/auth/tokenService';
 
@@ -16,6 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
   // Initialize auth state on app start
   useEffect(() => {
@@ -181,15 +183,31 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       setIsLoading(true);
-      await authService.logout();
-    } catch (error) {
-      console.error('Logout error:', error);
-    } finally {
-      // Clear local state regardless of API call result
+
+      // Clear local state first to avoid any authentication checks
       tokenService.removeToken();
+      localStorage.removeItem('nibaron_user_data');
       setUser(null);
       setIsAuthenticated(false);
+
+      // Call logout API after clearing state (non-blocking)
+      authService.logout().catch(error => {
+        console.error('Logout API error (non-critical):', error);
+      });
+
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Even if there's an error, clear the local state
+      tokenService.removeToken();
+      localStorage.removeItem('nibaron_user_data');
+      setUser(null);
+      setIsAuthenticated(false);
+    } finally {
       setIsLoading(false);
+      // Use setTimeout to ensure state updates have been processed
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 100);
     }
   };
 
