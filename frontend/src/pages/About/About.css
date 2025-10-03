@@ -150,6 +150,7 @@
   font-weight: 700;
   color: #2a2e34;
   margin-bottom: 3rem;
+  line-height: 1.2;
 }
 
 .section-subtitle {
@@ -610,8 +611,6 @@
 }
 
 .btn-primary {
-  padding: 1rem 2.5rem;
-  background: #68911b;
   color: white;
   border: none;
   border-radius: 12px;
@@ -665,38 +664,6 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .dataset-card {
-    grid-template-columns: 1fr;
-  }
-
-  .dataset-image {
-    height: 300px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1.25rem;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .mission-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dataset-features {
-    grid-template-columns: 1fr;
-  }
-
-  .nasa-integration-info {
-    flex-direction: column;
   }
 
   .impact-number {
@@ -711,5 +678,3 @@
     flex-direction: column;
     align-items: stretch;
   }
-}
-

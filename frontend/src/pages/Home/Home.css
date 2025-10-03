@@ -23,9 +23,10 @@
 .section-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #2a2e34;
   margin-bottom: 16px;
   line-height: 1.2;
+  text-align: center;
 }
 
 .section-subtitle {
@@ -47,10 +48,9 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn-primary:hover {

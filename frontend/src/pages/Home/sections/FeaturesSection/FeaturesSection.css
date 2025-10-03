@@ -36,13 +36,11 @@
 .section-title {
   font-size: 3rem;
   font-weight: 800;
-  color: #1e293b;
+  color: #2a2e34;
   line-height: 1.2;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  text-align: center;
+  position: relative;
 }
 
 .section-subtitle {
