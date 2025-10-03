@@ -1,0 +1,22 @@
+# Railway Deployment Configuration
+
+# Build Configuration
+[build]
+builder = "dockerfile"
+
+# Health Check
+[healthcheck]
+path = "/"
+timeout = 30
+interval = 10
+
+# Environment Variables that Railway will set automatically:
+# - RAILWAY_STATIC_URL: Your app's URL
+# - MYSQLHOST, MYSQLPORT, MYSQLDATABASE, MYSQLUSER, MYSQLPASSWORD: MySQL connection details
+
+# Additional environment variables you need to set in Railway dashboard:
+# APP_KEY: Generate with `php artisan key:generate --show`
+# APP_NAME: "Nibaron Website"
+# APP_ENV: production
+# APP_DEBUG: false
+# APP_URL: ${{RAILWAY_STATIC_URL}}
