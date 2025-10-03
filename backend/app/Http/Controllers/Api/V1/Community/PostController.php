@@ -31,17 +31,36 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'category' => 'required|string',
-            'images' => 'array|max:5',
-            'images.*' => 'image|max:2048'
+            'post_type' => 'required|in:demand,offer,question,discussion',
+            'crop_type' => 'nullable|string',
+            'quantity' => 'nullable|numeric|min:0',
+            'expected_price' => 'nullable|numeric|min:0',
+            'delivery_date' => 'nullable|date|after:today',
+            'location' => 'nullable|string',
+            'images' => 'nullable|array|max:5',
+            'tags' => 'nullable|array'
         ]);
+
+        $imageUrls = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('community-posts', 'public');
+                $imageUrls[] = $path;
+            }
+        }
 
         $post = Post::create([
             'user_id' => $request->user()->id,
             'title' => $request->title,
             'content' => $request->content,
-            'category' => $request->category,
-            'images' => $request->images ?? [],
+            'post_type' => $request->post_type,
+            'crop_type' => $request->crop_type,
+            'quantity' => $request->quantity,
+            'expected_price' => $request->expected_price,
+            'delivery_date' => $request->delivery_date,
+            'location' => $request->location,
+            'images' => $imageUrls,
+            'tags' => $request->tags ?? [],
             'status' => 'published'
         ]);
 

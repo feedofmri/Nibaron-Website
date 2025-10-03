@@ -123,13 +123,6 @@ const Dashboard = () => {
           <ActivePreOrders />
         </motion.section>
 
-        {/* Community Feed */}
-        <motion.section
-          className="dashboard-section community-section"
-          variants={sectionVariants}
-        >
-          <CommunityFeed />
-        </motion.section>
       </div>
     </motion.div>
   );

@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Heart, Globe, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import nibaronIcon from '../../../../assets/images/nibaron_icon.png';
 import './Footer.css';
 
 const Footer = () => {
@@ -8,9 +10,13 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <div className="footer-brand">
-            <h3 className="brand-title">
-              🌱 Nibaron Bazaar
-            </h3>
+            <div className="footer-brand-logo">
+              <img src={nibaronIcon} alt="Nibaron Bazaar" className="footer-logo-image" />
+              <div className="footer-brand-text">
+                <span className="footer-brand-title">Nibaron</span>
+                <span className="footer-brand-subtitle">Bazaar</span>
+              </div>
+            </div>
             <p className="brand-description">
               স্মার্ট কৃষি বাজার - Connecting farmers directly with consumers through AI-powered crop predictions and sustainable agriculture.
             </p>
@@ -31,50 +37,33 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="footer-section">
-          <h4 className="section-title">Quick Links</h4>
+        <div className="footer-section"><h4 className="footer-section-title">Marketplace</h4>
           <ul className="footer-links">
-            <li><a href="/marketplace">Marketplace</a></li>
-            <li><a href="/predictions">Crop Predictions</a></li>
-            <li><a href="/pre-orders">Pre-Orders</a></li>
-            <li><a href="/community">Community</a></li>
-            <li><a href="/farmers">For Farmers</a></li>
-            <li><a href="/buyers">For Buyers</a></li>
+            <li><Link to="/marketplace">Browse Products</Link></li>
+            <li><Link to="/pre-orders">Pre-Order Crops</Link></li>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/community">Farmer Community</Link></li>
           </ul>
         </div>
 
         <div className="footer-section">
-          <h4 className="section-title">Support</h4>
+          <h4 className="footer-section-title">Account</h4>
           <ul className="footer-links">
-            <li><a href="/help">Help Center</a></li>
-            <li><a href="/faq">FAQ</a></li>
-            <li><a href="/shipping">Shipping Info</a></li>
-            <li><a href="/returns">Returns</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-            <li><a href="/feedback">Feedback</a></li>
+            <li><Link to="/dashboard">Dashboard</Link></li>
+            <li><Link to="/orders">My Orders</Link></li>
+            <li><Link to="/profile">Profile</Link></li>
+            <li><Link to="/help">Help & Support</Link></li>
           </ul>
         </div>
 
         <div className="footer-section">
-          <h4 className="section-title">Contact Info</h4>
-          <div className="contact-info">
-            <div className="contact-item">
-              <MapPin size={16} />
-              <span>Dhaka, Bangladesh</span>
-            </div>
-            <div className="contact-item">
-              <Phone size={16} />
-              <span>+880 1234-567890</span>
-            </div>
-            <div className="contact-item">
-              <Mail size={16} />
-              <span>info@nibaronbazaar.com</span>
-            </div>
-            <div className="contact-item">
-              <Globe size={16} />
-              <span>www.nibaronbazaar.com</span>
-            </div>
-          </div>
+          <h4 className="footer-section-title">Contact Info</h4>
+          <ul className="footer-links">
+            <li><a href="https://maps.google.com/?q=Dhaka,Bangladesh" target="_blank" rel="noopener noreferrer"><MapPin size={16} /> Dhaka, Bangladesh</a></li>
+            <li><a href="tel:+8801234567890"><Phone size={16} /> +880 1234-567890</a></li>
+            <li><a href="mailto:info@nibaronbazaar.com"><Mail size={16} /> info@nibaronbazaar.com</a></li>
+            <li><a href="https://www.nibaronbazaar.com" target="_blank" rel="noopener noreferrer"><Globe size={16} /> www.nibaronbazaar.com</a></li>
+          </ul>
         </div>
       </div>
 
@@ -86,9 +75,9 @@ const Footer = () => {
             </p>
           </div>
           <div className="footer-bottom-links">
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/terms">Terms of Service</a>
-            <a href="/cookies">Cookie Policy</a>
+            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/terms">Terms of Service</Link>
+            <Link to="/cookies">Cookie Policy</Link>
           </div>
         </div>
       </div>

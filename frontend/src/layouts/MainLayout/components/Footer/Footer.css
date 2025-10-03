@@ -1,6 +1,6 @@
 .main-footer {
-  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-  color: #f9fafb;
+  background: linear-gradient(135deg, #2a2e34 0%, #1f2937 100%);
+  color: #f5f5f5;
   margin-top: auto;
 }
 
@@ -22,20 +22,47 @@
   max-width: 300px;
 }
 
-.brand-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #10b981;
-  margin: 0 0 16px 0;
+.footer-brand-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.footer-logo-image {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: brightness(1.1);
+}
+
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.footer-brand-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #68911b !important;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.footer-brand-subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #eab020 !important;
+  margin-top: -2px;
+  opacity: 0.9;
 }
 
 .brand-description {
   font-size: 0.875rem;
   line-height: 1.6;
-  color: #d1d5db;
+  color: #b0b0b0;
   margin: 0 0 24px 0;
 }
 
@@ -50,26 +77,31 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: rgba(104, 145, 27, 0.1);
+  border: 1px solid rgba(104, 145, 27, 0.2);
   border-radius: 8px;
-  color: #10b981;
+  color: #68911b;
   transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .social-link:hover {
-  background: #10b981;
+  background: #68911b;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(104, 145, 27, 0.3);
 }
 
-.section-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #f9fafb;
-  margin: 0 0 20px 0;
+.footer-section-title {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  margin: 0 0 20px 0 !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  border: none !important;
+  outline: none !important;
+  background: none !important;
 }
 
 .footer-links {
@@ -82,41 +114,75 @@
 }
 
 .footer-links li a {
-  color: #d1d5db;
+  color: #b0b0b0;
   text-decoration: none;
   font-size: 0.875rem;
   transition: all 0.2s ease;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 4px 0;
 }
 
+.footer-links li a svg {
+  color: #68911b;
+  flex-shrink: 0;
+}
+
 .footer-links li a:hover {
-  color: #10b981;
+  color: #68911b;
   padding-left: 8px;
 }
 
 .contact-info {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .contact-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: #d1d5db;
+  gap: 14px;
+  color: #b0b0b0;
   font-size: 0.875rem;
+  padding: 12px 16px;
+  background: rgba(104, 145, 27, 0.05);
+  border: 1px solid rgba(104, 145, 27, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.contact-item:hover {
+  background: rgba(104, 145, 27, 0.1);
+  border-color: rgba(104, 145, 27, 0.2);
+  transform: translateX(4px);
+  color: #d1d5db;
 }
 
 .contact-item svg {
-  color: #10b981;
+  color: #68911b;
   flex-shrink: 0;
+  padding: 6px;
+  background: rgba(104, 145, 27, 0.15);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover svg {
+  background: rgba(104, 145, 27, 0.25);
+  transform: scale(1.1);
+}
+
+.contact-item span {
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .footer-bottom {
-  border-top: 1px solid #374151;
-  background: rgba(17, 24, 39, 0.8);
+  border-top: 1px solid #4a4e55;
+  background: rgba(42, 46, 52, 0.8);
 }
 
 .footer-bottom-content {
@@ -136,14 +202,14 @@
 .copyright p {
   margin: 0;
   font-size: 0.875rem;
-  color: #9ca3af;
+  color: #6e6e6e;
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
 .heart-icon {
-  color: #ef4444;
+  color: #f04e23;
   animation: heartbeat 2s ease-in-out infinite;
 }
 
@@ -158,14 +224,14 @@
 }
 
 .footer-bottom-links a {
-  color: #9ca3af;
+  color: #6e6e6e;
   text-decoration: none;
   font-size: 0.875rem;
   transition: color 0.2s ease;
 }
 
 .footer-bottom-links a:hover {
-  color: #10b981;
+  color: #68911b;
 }
 
 /* Responsive Design */
@@ -201,26 +267,5 @@
 
   .footer-bottom-links {
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-content {
-    padding: 24px 12px 20px;
-  }
-
-  .brand-title {
-    font-size: 1.25rem;
-  }
-
-  .social-links {
-    gap: 12px;
-  }
-
-  .social-link {
-    width: 36px;
-    height: 36px;
   }
 }

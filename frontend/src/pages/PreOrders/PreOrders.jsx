@@ -1,10 +1,82 @@
 import React, { useState, useEffect } from 'react';
-import { Package, Calendar, DollarSign, Filter, Plus, Edit2, X, Eye, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { Package, Calendar, DollarSign, Filter, Plus, Edit2, X, Eye, Clock, CheckCircle, XCircle, Users, MapPin } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { preOrderService } from '../../services/featureServices';
 import { useAuth } from '../../context/AuthContext';
 import './PreOrders.css';
+
+// Sample public pre-orders data to show for non-authenticated users
+const SAMPLE_PUBLIC_PREORDERS = [
+  {
+    id: 'sample-1',
+    crop_type: 'Boro Rice',
+    product: { name: 'Boro Rice', category: 'Grains' },
+    farmer: { name: 'Ahmed Rahman', location: 'Cumilla', verified: true },
+    quantity: 500,
+    expected_price: 42,
+    predicted_harvest_date: '2025-11-15',
+    ai_quality_prediction: 92,
+    expected_quantity: 500,
+    status: 'available',
+    notes: 'Premium quality Boro rice with AI-verified growing conditions',
+    weather_conditions: 'Optimal',
+    soil_quality: 'Excellent',
+    created_at: '2025-10-01T10:00:00Z',
+    isPublicSample: true
+  },
+  {
+    id: 'sample-2',
+    crop_type: 'Organic Tomatoes',
+    product: { name: 'Organic Tomatoes', category: 'Vegetables' },
+    farmer: { name: 'Fatima Begum', location: 'Rangpur', verified: true },
+    quantity: 200,
+    expected_price: 35,
+    predicted_harvest_date: '2025-10-25',
+    ai_quality_prediction: 88,
+    expected_quantity: 200,
+    status: 'available',
+    notes: 'Organic certified tomatoes grown with sustainable practices',
+    weather_conditions: 'Good',
+    soil_quality: 'Good',
+    created_at: '2025-09-28T14:30:00Z',
+    isPublicSample: true
+  },
+  {
+    id: 'sample-3',
+    crop_type: 'Premium Potatoes',
+    product: { name: 'Premium Potatoes', category: 'Vegetables' },
+    farmer: { name: 'Karim Sheikh', location: 'Bogra', verified: true },
+    quantity: 1000,
+    expected_price: 22,
+    predicted_harvest_date: '2025-11-05',
+    ai_quality_prediction: 95,
+    expected_quantity: 1000,
+    status: 'reserved',
+    notes: 'High-grade potatoes suitable for export',
+    weather_conditions: 'Optimal',
+    soil_quality: 'Excellent',
+    created_at: '2025-09-25T11:20:00Z',
+    isPublicSample: true
+  },
+  {
+    id: 'sample-4',
+    crop_type: 'Alphonso Mangoes',
+    product: { name: 'Alphonso Mangoes', category: 'Fruits' },
+    farmer: { name: 'Ibrahim Khan', location: 'Rajshahi', verified: true },
+    quantity: 150,
+    expected_price: 120,
+    predicted_harvest_date: '2025-12-10',
+    ai_quality_prediction: 90,
+    expected_quantity: 150,
+    status: 'available',
+    notes: 'Premium Alphonso mangoes - limited availability',
+    weather_conditions: 'Good',
+    soil_quality: 'Excellent',
+    created_at: '2025-09-30T16:45:00Z',
+    isPublicSample: true
+  }
+];
 
 const PreOrders = () => {
   const [preOrders, setPreOrders] = useState([]);
@@ -14,49 +86,70 @@ const PreOrders = () => {
   const [selectedPreOrder, setSelectedPreOrder] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [isUsingPublicData, setIsUsingPublicData] = useState(false);
 
   const { isAuthenticated, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Only fetch pre-orders if user is authenticated and auth is not loading
+    // Wait for auth to load, then fetch appropriate data
     if (!authLoading) {
-      if (isAuthenticated) {
-        fetchPreOrders();
-      } else {
-        // Redirect to login if not authenticated
-        navigate('/login');
-      }
+      fetchPreOrders();
     }
-  }, [statusFilter, isAuthenticated, authLoading, navigate]);
+  }, [statusFilter, isAuthenticated, authLoading]);
 
   const fetchPreOrders = async () => {
-    // Don't fetch if not authenticated
-    if (!isAuthenticated) {
-      return;
-    }
+    setLoading(true);
 
     try {
-      setLoading(true);
-      const params = {};
-      if (statusFilter) params.status = statusFilter;
-
-      const response = await preOrderService.getPreOrders(params);
-      setPreOrders(response.data.data || []);
-    } catch (error) {
-      if (error.response?.status === 401) {
-        toast.error('Please log in to view pre-orders');
-        navigate('/login');
+      if (isAuthenticated) {
+        // Only make API calls if user is authenticated
+        try {
+          const params = {};
+          if (statusFilter) params.status = statusFilter;
+          const response = await preOrderService.getPreOrders(params);
+          setPreOrders(response.data.data || []);
+          setIsUsingPublicData(false);
+        } catch (error) {
+          console.log('Failed to fetch authenticated pre-orders, showing sample data:', error);
+          // If authenticated call fails, fall back to sample data
+          setPreOrders(getFilteredSampleData());
+          setIsUsingPublicData(true);
+        }
       } else {
-        toast.error('Failed to load pre-orders');
+        // For public users, NEVER call the API - just show sample data immediately
+        setPreOrders(getFilteredSampleData());
+        setIsUsingPublicData(true);
       }
-      console.error('Error fetching pre-orders:', error);
+    } catch (error) {
+      console.error('Error in fetchPreOrders:', error);
+      // Always fall back to sample data on any error
+      setPreOrders(getFilteredSampleData());
+      setIsUsingPublicData(true);
     } finally {
       setLoading(false);
     }
   };
 
+  const getFilteredSampleData = () => {
+    let filtered = [...SAMPLE_PUBLIC_PREORDERS];
+    if (statusFilter) {
+      filtered = filtered.filter(order => order.status === statusFilter);
+    }
+    return filtered;
+  };
+
   const handleEdit = (preOrder) => {
+    if (!isAuthenticated) {
+      toast.error('Please log in to edit pre-orders');
+      navigate('/login');
+      return;
+    }
+    if (preOrder.isPublicSample) {
+      toast.info('This is a sample pre-order. Log in to manage your own pre-orders.');
+      navigate('/login');
+      return;
+    }
     if (preOrder.status !== 'pending') {
       toast.error('Can only edit pending pre-orders');
       return;
@@ -65,7 +158,17 @@ const PreOrders = () => {
     setShowEditModal(true);
   };
 
-  const handleCancel = async (id) => {
+  const handleCancel = async (id, preOrder) => {
+    if (!isAuthenticated) {
+      toast.error('Please log in to cancel pre-orders');
+      navigate('/login');
+      return;
+    }
+    if (preOrder?.isPublicSample) {
+      toast.info('This is a sample pre-order. Log in to manage your own pre-orders.');
+      navigate('/login');
+      return;
+    }
     if (!window.confirm('Are you sure you want to cancel this pre-order?')) return;
 
     try {
@@ -80,6 +183,15 @@ const PreOrders = () => {
   const handleViewDetails = (preOrder) => {
     setSelectedPreOrder(preOrder);
     setShowDetailsModal(true);
+  };
+
+  const handleCreatePreOrder = () => {
+    if (!isAuthenticated) {
+      toast.info('Please log in to create your own pre-orders');
+      navigate('/login');
+      return;
+    }
+    setShowCreateModal(true);
   };
 
   const getStatusIcon = (status) => {
@@ -107,25 +219,38 @@ const PreOrders = () => {
     );
   }
 
-  // Don't render if not authenticated (will redirect)
-  if (!isAuthenticated) {
-    return null;
-  }
-
   return (
     <div className="pre-orders">
+      {/* Public Notice Banner */}
+      {isUsingPublicData && (
+        <div className="public-notice-banner">
+          <div className="notice-content">
+            <Users size={20} />
+            <div className="notice-text">
+              <span className="notice-title">
+                {isAuthenticated ? 'Demo Mode' : 'Browse Sample Pre-Orders'}
+              </span>
+              <span className="notice-description">
+                {isAuthenticated
+                  ? 'Showing sample data. Your actual pre-orders will appear here once available.'
+                  : 'These are sample pre-orders to showcase the platform. Sign up to create and manage your own pre-orders.'
+                }
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="pre-orders-header">
         <div className="header-content">
           <h1>Pre-Orders</h1>
-          <p>Manage your pre-order requests</p>
+          <p>
+            {isAuthenticated
+              ? (isUsingPublicData ? 'Sample pre-orders from local farmers' : 'Manage your pre-order requests')
+              : 'Browse upcoming harvests and pre-order directly from farmers'
+            }
+          </p>
         </div>
-        <button
-          className="btn-primary"
-          onClick={() => setShowCreateModal(true)}
-        >
-          <Plus size={18} />
-          Create Pre-Order
-        </button>
       </div>
 
       {/* Filters */}
@@ -160,29 +285,53 @@ const PreOrders = () => {
               key={preOrder.id}
               preOrder={preOrder}
               onEdit={() => handleEdit(preOrder)}
-              onCancel={() => handleCancel(preOrder.id)}
+              onCancel={() => handleCancel(preOrder.id, preOrder)}
               onViewDetails={() => handleViewDetails(preOrder)}
               getStatusIcon={getStatusIcon}
               getStatusClass={getStatusClass}
+              isAuthenticated={isAuthenticated}
+              isPublicSample={preOrder.isPublicSample}
             />
           ))
         ) : (
           <div className="no-pre-orders">
             <Package size={48} />
             <h3>No pre-orders found</h3>
-            <p>Create your first pre-order to get started</p>
-            <button
-              className="btn-primary"
-              onClick={() => setShowCreateModal(true)}
-            >
-              Create Pre-Order
-            </button>
+            {isAuthenticated ? (
+              <>
+                <p>Create your first pre-order to get started with direct farmer connections</p>
+                <button
+                  className="btn-primary"
+                  onClick={handleCreatePreOrder}
+                >
+                  Create Pre-Order
+                </button>
+              </>
+            ) : (
+              <>
+                <p>Join our platform to connect directly with farmers and pre-order fresh produce</p>
+                <div className="cta-buttons">
+                  <button
+                    className="btn-primary"
+                    onClick={() => navigate('/signup')}
+                  >
+                    Sign Up Free
+                  </button>
+                  <button
+                    className="btn-secondary"
+                    onClick={() => navigate('/login')}
+                  >
+                    Login
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>
 
-      {/* Modals */}
-      {showCreateModal && (
+      {/* Modals - only show if authenticated and not public samples */}
+      {showCreateModal && isAuthenticated && (
         <CreatePreOrderModal
           onClose={() => setShowCreateModal(false)}
           onSuccess={() => {
@@ -193,7 +342,7 @@ const PreOrders = () => {
         />
       )}
 
-      {showEditModal && selectedPreOrder && (
+      {showEditModal && selectedPreOrder && isAuthenticated && !selectedPreOrder.isPublicSample && (
         <EditPreOrderModal
           preOrder={selectedPreOrder}
           onClose={() => setShowEditModal(false)}
@@ -209,15 +358,22 @@ const PreOrders = () => {
         <PreOrderDetailsModal
           preOrder={selectedPreOrder}
           onClose={() => setShowDetailsModal(false)}
+          isAuthenticated={isAuthenticated}
         />
       )}
     </div>
   );
 };
 
-const PreOrderCard = ({ preOrder, onEdit, onCancel, onViewDetails, getStatusIcon, getStatusClass }) => {
+const PreOrderCard = ({ preOrder, onEdit, onCancel, onViewDetails, getStatusIcon, getStatusClass, isAuthenticated, isPublicSample }) => {
   return (
-    <div className="pre-order-card">
+    <div className={`pre-order-card ${isPublicSample ? 'sample-card' : ''}`}>
+      {isPublicSample && (
+        <div className="sample-badge">
+          <span>Sample</span>
+        </div>
+      )}
+
       <div className="pre-order-header">
         <div className="pre-order-info">
           <h3>{preOrder.product?.name || 'Product'}</h3>
@@ -230,16 +386,27 @@ const PreOrderCard = ({ preOrder, onEdit, onCancel, onViewDetails, getStatusIcon
           <button onClick={onViewDetails} className="btn-icon" title="View Details">
             <Eye size={16} />
           </button>
-          {preOrder.status === 'pending' && (
+          {preOrder.status === 'pending' && isAuthenticated && !isPublicSample && (
             <button onClick={onEdit} className="btn-icon" title="Edit">
               <Edit2 size={16} />
             </button>
           )}
-          {(preOrder.status === 'pending' || preOrder.status === 'confirmed') && (
+          {(preOrder.status === 'pending' || preOrder.status === 'confirmed') && isAuthenticated && !isPublicSample && (
             <button onClick={onCancel} className="btn-icon danger" title="Cancel">
               <X size={16} />
             </button>
           )}
+        </div>
+      </div>
+
+      <div className="farmer-info">
+        <div className="farmer-detail">
+          <Users size={14} />
+          <span>{preOrder.farmer?.name || 'Local Farmer'}</span>
+        </div>
+        <div className="location-detail">
+          <MapPin size={14} />
+          <span>{preOrder.farmer?.location || 'Bangladesh'}</span>
         </div>
       </div>
 
@@ -267,6 +434,9 @@ const PreOrderCard = ({ preOrder, onEdit, onCancel, onViewDetails, getStatusIcon
       <div className="pre-order-meta">
         <span className="created-date">
           Created: {new Date(preOrder.created_at).toLocaleDateString()}
+        </span>
+        <span className="total-amount">
+          Total: ৳{(preOrder.quantity * preOrder.expected_price).toFixed(2)}
         </span>
       </div>
     </div>

@@ -36,39 +36,54 @@ class OrderController extends Controller
             'items' => 'required|array',
             'items.*.product_id' => 'required|exists:products,id',
             'items.*.quantity' => 'required|numeric|min:0.01',
-            'shipping_address' => 'required|string'
+            'items.*.price' => 'required|numeric|min:0',
+            'delivery_option' => 'required|in:pickup,delivery',
+            'delivery_address' => 'required_if:delivery_option,delivery|string',
+            'phone_number' => 'required|string',
+            'payment_method' => 'required|in:cod,bkash,nagad,bank',
+            'total_amount' => 'required|numeric|min:0'
         ]);
 
+        // Create order
         $order = Order::create([
             'user_id' => $request->user()->id,
-            'order_number' => 'ORD-' . time(),
+            'order_number' => 'ORD-' . time() . '-' . rand(1000, 9999),
             'status' => 'pending',
-            'shipping_address' => $request->shipping_address,
-            'total_amount' => 0
+            'delivery_option' => $request->delivery_option,
+            'delivery_address' => $request->delivery_address,
+            'phone_number' => $request->phone_number,
+            'payment_method' => $request->payment_method,
+            'subtotal' => $request->total_amount - ($request->delivery_option === 'delivery' ? 50 : 0),
+            'delivery_fee' => $request->delivery_option === 'delivery' ? 50 : 0,
+            'total_amount' => $request->total_amount
         ]);
 
-        $totalAmount = 0;
+        // Create order items
         foreach ($request->items as $item) {
-            $product = Product::find($item['product_id']);
-            $itemTotal = $product->price_per_unit * $item['quantity'];
-
             OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $item['product_id'],
                 'quantity' => $item['quantity'],
-                'unit_price' => $product->price_per_unit,
-                'total_price' => $itemTotal
+                'unit_price' => $item['price'],
+                'subtotal' => $item['quantity'] * $item['price']
             ]);
 
-            $totalAmount += $itemTotal;
+            // Optionally: Reduce product quantity
+            // $product = Product::find($item['product_id']);
+            // $product->quantity_available -= $item['quantity'];
+            // $product->save();
         }
 
-        $order->update(['total_amount' => $totalAmount]);
+        // Clear cart after order
+        $cart = \App\Models\Cart::where('user_id', $request->user()->id)->first();
+        if ($cart) {
+            $cart->cartItems()->delete();
+        }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Order created successfully',
-            'data' => $order->load('orderItems.product')
+            'message' => 'Order placed successfully',
+            'data' => $order->load(['orderItems.product'])
         ], 201);
     }
 

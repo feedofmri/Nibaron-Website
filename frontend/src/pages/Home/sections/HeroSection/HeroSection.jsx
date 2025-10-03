@@ -85,7 +85,7 @@ const HeroSection = () => {
           style={{ willChange: 'auto' }}
         >
           <h2 className="hero-title bangla">স্মার্ট কৃষি বাজার</h2>
-          <p className="hero-subtitle">
+          <p className="hero-subtitle text-gray-500">
             AI-Powered Crop Predictions. Pre-Order Future Harvests.
             Supported by NASA Satellite Dataset.
           </p>

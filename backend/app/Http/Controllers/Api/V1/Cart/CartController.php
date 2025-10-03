@@ -37,6 +37,14 @@ class CartController extends Controller
         $cart = Cart::firstOrCreate(['user_id' => $request->user()->id]);
         $product = Product::find($request->product_id);
 
+        // Check if product has enough quantity
+        if ($product->quantity_available < $request->quantity) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Insufficient quantity available'
+            ], 400);
+        }
+
         $cartItem = CartItem::updateOrCreate(
             [
                 'cart_id' => $cart->id,
@@ -51,7 +59,7 @@ class CartController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Item added to cart successfully',
-            'data' => $cartItem
+            'data' => $cartItem->load('product')
         ]);
     }
 
@@ -87,6 +95,40 @@ class CartController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Cart cleared successfully'
+        ]);
+    }
+
+    public function updateItem(Request $request, $itemId): JsonResponse
+    {
+        $request->validate([
+            'quantity' => 'required|numeric|min:0.01'
+        ]);
+
+        $cartItem = CartItem::whereHas('cart', function($query) use ($request) {
+            $query->where('user_id', $request->user()->id);
+        })->find($itemId);
+
+        if (!$cartItem) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Cart item not found'
+            ], 404);
+        }
+
+        // Check if product has enough quantity
+        if ($cartItem->product->quantity_available < $request->quantity) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Insufficient quantity available'
+            ], 400);
+        }
+
+        $cartItem->update(['quantity' => $request->quantity]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Cart item updated successfully',
+            'data' => $cartItem->load('product')
         ]);
     }
 }

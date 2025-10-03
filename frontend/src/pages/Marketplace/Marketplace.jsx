@@ -4,7 +4,8 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { productService, preOrderService } from '../../services/featureServices';
 import { useAuth } from '../../context/AuthContext';
-import api from '../../services/api'; // Add API import for cart/wishlist operations
+import { useCart } from '../../context/CartContext';
+import api from '../../services/api'; // Keep for wishlist operations
 import './Marketplace.css';
 import PaginationComponent from '../../components/PaginationComponent/PaginationComponent';
 
@@ -46,9 +47,7 @@ const Marketplace = () => {
       if (sortBy) params.sort = sortBy;
       // Don't send pagination params - fetch all products
 
-      console.log('🔍 Fetching all products with params:', params);
       const response = await productService.getProducts(params);
-      console.log('📦 Raw API response:', response);
 
       // Handle different possible response structures
       let productsData = [];
@@ -59,8 +58,6 @@ const Marketplace = () => {
       } else if (Array.isArray(response)) {
         productsData = response;
       }
-
-      console.log('📋 Extracted products:', productsData);
 
       // Store all products and reset to page 1
       setAllProducts(Array.isArray(productsData) ? productsData : []);
@@ -97,16 +94,6 @@ const Marketplace = () => {
     setProducts(paginatedProducts);
     setTotalProducts(allProducts.length);
     setTotalPages(Math.ceil(allProducts.length / itemsPerPage));
-
-    console.log('📊 Frontend pagination applied:', {
-      totalProducts: allProducts.length,
-      currentPage,
-      itemsPerPage,
-      startIndex,
-      endIndex,
-      paginatedProducts: paginatedProducts.length,
-      totalPages: Math.ceil(allProducts.length / itemsPerPage)
-    });
   };
 
   const filteredProducts = (Array.isArray(products) ? products : []).filter(product => {
@@ -116,29 +103,7 @@ const Marketplace = () => {
     const productPrice = product.price || product.unit_price || product.price_per_kg || 0;
     const matchesPrice = productPrice >= priceRange[0] && productPrice <= priceRange[1];
 
-    // Debug logging to see what's happening with filtering
-    console.log('🔍 Product filter debug:', {
-      productName: product.name,
-      originalPrice: product.price,
-      unitPrice: product.unit_price,
-      pricePerKg: product.price_per_kg,
-      finalPrice: productPrice,
-      priceRange: priceRange,
-      searchTerm: searchTerm,
-      matchesSearch: matchesSearch,
-      matchesPrice: matchesPrice,
-      willShow: matchesSearch && matchesPrice,
-      fullProduct: product // Add full product to see all available fields
-    });
-
     return matchesSearch && matchesPrice;
-  });
-
-  console.log('📊 Filtering results:', {
-    totalProducts: products.length,
-    filteredProducts: filteredProducts.length,
-    searchTerm: searchTerm,
-    priceRange: priceRange
   });
 
   const handleCreatePreOrder = (product) => {
@@ -267,7 +232,20 @@ const Marketplace = () => {
 const ProductCard = ({ product, onPreOrder }) => {
   const [imageError, setImageError] = useState(false);
   const { isAuthenticated } = useAuth();
+  const { addItem } = useCart();
   const navigate = useNavigate();
+
+  // Handler for navigating to product details
+  const handleCardClick = (e) => {
+    // Prevent navigation if clicking on a button inside the card
+    if (
+      e.target.closest('.product-actions') ||
+      e.target.closest('.wishlist-btn')
+    ) {
+      return;
+    }
+    navigate(`/products/${product.id}`);
+  };
 
   const handleAddToCart = async () => {
     if (!isAuthenticated) {
@@ -276,15 +254,11 @@ const ProductCard = ({ product, onPreOrder }) => {
       return;
     }
 
+    // Use the addItem function from CartContext with the product object
     try {
-      // Call the add to cart API endpoint
-      await api.post(`/products/${product.id}/add-to-cart`, {
-        quantity: 1 // Default quantity
-      });
-      toast.success(`${product.name} added to cart!`);
+      await addItem(product, 1);
     } catch (error) {
       console.error('Error adding to cart:', error);
-      toast.error('Failed to add product to cart. Please try again.');
     }
   };
 
@@ -319,11 +293,11 @@ const ProductCard = ({ product, onPreOrder }) => {
   };
 
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={handleCardClick} style={{ cursor: 'pointer' }}>
       <div className="product-image">
         {!imageError ? (
           <img
-            src={product.image || '/api/placeholder/300/200'}
+            src={product.image || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzk5OTk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlByb2R1Y3QgSW1hZ2U8L3RleHQ+PC9zdmc+'}
             alt={product.name}
             onError={() => setImageError(true)}
           />
@@ -339,7 +313,7 @@ const ProductCard = ({ product, onPreOrder }) => {
         {/* Wishlist Button */}
         <button
           className="wishlist-btn"
-          onClick={handleAddToWishlist}
+          onClick={(e) => { e.stopPropagation(); handleAddToWishlist(); }}
           title={isAuthenticated ? "Add to wishlist" : "Sign in to add to wishlist"}
         >
           <Heart size={16} />
@@ -347,7 +321,7 @@ const ProductCard = ({ product, onPreOrder }) => {
       </div>
 
       <div className="product-info">
-        <h3>{product.name || 'Product Name'}</h3>
+        <h3 onClick={(e) => { e.stopPropagation(); navigate(`/products/${product.id}`); }} style={{ cursor: 'pointer' }}>{product.name || 'Product Name'}</h3>
         <div className="product-meta">
           <div className="rating">
             <Star size={16} fill="currentColor" />
@@ -373,7 +347,7 @@ const ProductCard = ({ product, onPreOrder }) => {
         <div className="product-actions">
           <button
             className="btn-secondary"
-            onClick={handleAddToCart}
+            onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
             title={isAuthenticated ? "Add to cart" : "Sign in to add to cart"}
           >
             <ShoppingCart size={18} />
@@ -381,7 +355,7 @@ const ProductCard = ({ product, onPreOrder }) => {
           </button>
           <button
             className="btn-primary"
-            onClick={handlePreOrder}
+            onClick={(e) => { e.stopPropagation(); handlePreOrder(); }}
             title={isAuthenticated ? "Create pre-order" : "Sign in to create pre-order"}
           >
             <Package size={18} />

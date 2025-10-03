@@ -19,6 +19,9 @@ import PreOrders from '../pages/PreOrders/PreOrders.jsx';
 import Orders from '../pages/Orders/Orders.jsx';
 import Community from '../pages/Community/Community.jsx';
 import Settings from '../pages/Settings/Settings.jsx';
+import ProductDetail from '../pages/ProductDetail/ProductDetail.jsx';
+import Cart from '../pages/Cart/Cart.jsx';
+import About from '../pages/About/About.jsx';
 
 // Route Guards
 const PrivateRoute = ({ children }) => {
@@ -154,7 +157,7 @@ const AppRoutes = () => {
           element={
             <MixedRoute>
               <motion.div variants={pageVariants} initial="initial" animate="enter" exit="exit">
-                <div>About Page (Create this page)</div>
+                <About />
               </motion.div>
             </MixedRoute>
           }
@@ -231,6 +234,32 @@ const AppRoutes = () => {
             </MainLayout>
           </PrivateRoute>
         } />
+
+        {/* Product Detail Page - accessible to all */}
+        <Route
+          path="/products/:id"
+          element={
+            <MixedRoute>
+              <motion.div variants={pageVariants} initial="initial" animate="enter" exit="exit">
+                <ProductDetail />
+              </motion.div>
+            </MixedRoute>
+          }
+        />
+
+        {/* Cart Page - accessible to authenticated users */}
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute>
+              <MainLayout>
+                <motion.div variants={pageVariants} initial="initial" animate="enter" exit="exit">
+                  <Cart />
+                </motion.div>
+              </MainLayout>
+            </PrivateRoute>
+          }
+        />
 
         {/* Catch all route */}
         <Route path="*" element={<NotFound />} />

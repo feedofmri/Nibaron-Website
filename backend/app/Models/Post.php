@@ -15,7 +15,14 @@ class Post extends Model
         'user_id',
         'title',
         'content',
+        'post_type',
+        'crop_type',
+        'quantity',
+        'expected_price',
+        'delivery_date',
+        'location',
         'images',
+        'tags',
         'category',
         'status',
         'likes_count',
@@ -23,7 +30,11 @@ class Post extends Model
     ];
 
     protected $casts = [
+        'quantity' => 'decimal:2',
+        'expected_price' => 'decimal:2',
+        'delivery_date' => 'date',
         'images' => 'array',
+        'tags' => 'array',
         'likes_count' => 'integer',
         'comments_count' => 'integer'
     ];

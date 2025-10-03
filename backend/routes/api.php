@@ -79,6 +79,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Orders routes
     Route::apiResource('orders', OrderController::class)->only(['index', 'show']);
+    Route::post('/orders', [OrderController::class, 'store']); // Place new order
+
+    // Cart routes
+    Route::get('/cart', [\App\Http\Controllers\Api\V1\Cart\CartController::class, 'index']);
+    Route::post('/cart/items', [\App\Http\Controllers\Api\V1\Cart\CartController::class, 'addItem']);
+    Route::put('/cart/items/{id}', [\App\Http\Controllers\Api\V1\Cart\CartController::class, 'updateItem']);
+    Route::delete('/cart/items/{id}', [\App\Http\Controllers\Api\V1\Cart\CartController::class, 'removeItem']);
+    Route::delete('/cart/clear', [\App\Http\Controllers\Api\V1\Cart\CartController::class, 'clear']);
 
     // Community routes
     Route::apiResource('community/posts', PostController::class);
@@ -93,9 +101,4 @@ Route::middleware('auth:sanctum')->group(function () {
             'show' => 'support.tickets.show'
         ]
     ])->only(['index', 'store', 'show']);
-
-    // Cart routes
-    Route::get('/cart', function() {
-        return response()->json([]);
-    });
 });

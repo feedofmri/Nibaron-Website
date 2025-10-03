@@ -53,7 +53,7 @@ class CartService {
 
   // Add item to cart
   async addItem(itemData) {
-    return this.makeRequest('/cart/add', {
+    return this.makeRequest('/cart/items', {
       method: 'POST',
       body: JSON.stringify({
         product_id: itemData.productId,
@@ -65,10 +65,9 @@ class CartService {
 
   // Update item quantity
   async updateItem(itemData) {
-    return this.makeRequest('/cart/update', {
+    return this.makeRequest(`/cart/items/${itemData.productId}`, {
       method: 'PUT',
       body: JSON.stringify({
-        product_id: itemData.productId,
         quantity: itemData.quantity,
       }),
     });
@@ -76,11 +75,8 @@ class CartService {
 
   // Remove item from cart
   async removeItem(productId) {
-    return this.makeRequest('/cart/remove', {
+    return this.makeRequest(`/cart/items/${productId}`, {
       method: 'DELETE',
-      body: JSON.stringify({
-        product_id: productId,
-      }),
     });
   }
 

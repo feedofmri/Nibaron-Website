@@ -23,12 +23,14 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useNotifications } from '../../context/NotificationContext';
+import { useCart } from '../../context/CartContext';
 import nibaronIcon from '../../assets/images/nibaron_icon.png';
 import './CommonHeader.css';
 
 const CommonHeader = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const { unreadCount } = useNotifications();
+  const { itemCount = 0 } = useCart(); // Use itemCount instead of cartItems
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -107,11 +109,12 @@ const CommonHeader = () => {
     <header className="common-header">
       <div className="header-container">
         {/* Logo */}
-        <div className="header-logo">
-          <Link to="/" className="logo-link">
-            <img src={nibaronIcon} alt="Nibaron Icon" className="nibaron-icon" />
-            <span className="logo-text">Nibaron</span>
-          </Link>
+        <div className="brand-logo">
+          <img src={nibaronIcon} alt="Nibaron Bazaar" className="logo-image" />
+          <div className="brand-text">
+            <span className="brand-title">Nibaron</span>
+            <span className="brand-subtitle">Bazaar</span>
+          </div>
         </div>
 
         {/* Desktop Navigation */}
@@ -150,6 +153,16 @@ const CommonHeader = () => {
               <button className="action-btn">
                 <MessageCircle size={20} />
               </button>
+
+              {/* Cart */}
+              <button className="action-btn">
+                <Link to="/cart" className="action-btn cart-btn">
+                  <ShoppingCart size={20} />
+                  {itemCount > 0 && (
+                      <span className="cart-badge">{itemCount}</span>
+                  )}
+                </Link>
+                </button>
 
               {/* Profile Dropdown */}
               <div className="profile-dropdown" ref={profileRef}>
@@ -233,6 +246,17 @@ const CommonHeader = () => {
             </>
           ) : (
             <>
+              {/* Cart for logged-out users */}
+              <div className="cart-container">
+                <button
+                  className="action-btn cart-btn"
+                  onClick={() => navigate('/login')}
+                  title="Sign in to view cart"
+                >
+                  <ShoppingCart size={20} />
+                </button>
+              </div>
+
               {/* Auth Buttons for logged-out users */}
               <button
                 className="auth-btn signin-btn"

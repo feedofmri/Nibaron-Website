@@ -11,15 +11,16 @@ class CartItem extends Model
     use HasFactory;
 
     protected $fillable = [
+        'cart_id',
         'user_id',
         'product_id',
         'quantity',
-        'price'
+        'unit_price'
     ];
 
     protected $casts = [
-        'price' => 'decimal:2',
-        'quantity' => 'integer'
+        'unit_price' => 'decimal:2',
+        'quantity' => 'decimal:3'
     ];
 
     public function user(): BelongsTo
@@ -34,6 +35,6 @@ class CartItem extends Model
 
     public function getTotalPriceAttribute(): float
     {
-        return $this->price * $this->quantity;
+        return $this->unit_price * $this->quantity;
     }
 }

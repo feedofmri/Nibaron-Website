@@ -32,24 +32,30 @@ api.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
+      // Only handle 401 errors if there was actually a token (meaning user was authenticated)
+      const hadToken = localStorage.getItem('nibaron_access_token');
+
       // Log the error for debugging with more details
       console.warn('🔒 API Authentication Error (401):', {
         url: error.config?.url,
         method: error.config?.method,
         message: error.response?.data?.message || 'Unauthorized',
-        token: localStorage.getItem('nibaron_access_token') ? 'Present' : 'Missing',
+        hadToken: hadToken ? 'Yes' : 'No',
         fullResponse: error.response?.data
       });
 
-      // Clear invalid tokens and user data
-      localStorage.removeItem('nibaron_access_token');
-      localStorage.removeItem('nibaron_refresh_token');
-      localStorage.removeItem('nibaron_user_data');
+      // Only clear tokens and dispatch logout event if user was actually authenticated
+      if (hadToken) {
+        // Clear invalid tokens and user data
+        localStorage.removeItem('nibaron_access_token');
+        localStorage.removeItem('nibaron_refresh_token');
+        localStorage.removeItem('nibaron_user_data');
 
-      // Dispatch a custom event to notify components about auth failure
-      window.dispatchEvent(new CustomEvent('auth:logout', {
-        detail: { reason: 'token_expired' }
-      }));
+        // Dispatch a custom event to notify components about auth failure
+        window.dispatchEvent(new CustomEvent('auth:logout', {
+          detail: { reason: 'token_expired' }
+        }));
+      }
 
     } else if (error.response?.status >= 400) {
       // Log other API errors for debugging
