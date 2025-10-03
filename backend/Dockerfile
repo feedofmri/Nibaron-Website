@@ -76,15 +76,18 @@ RUN echo '<VirtualHost *:80>\n\
 # Make startup script executable
 RUN chmod +x /var/www/html/docker/entrypoint.sh
 
-# Set environment variable for Apache
+# Set environment variables for Apache
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
 
-# Expose port
+# Expose port 80
 EXPOSE 80
 
-# Health check using the simple PHP file with longer startup period
-HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
-    CMD curl -f http://localhost/health.php || exit 1
+# Remove Docker health check for now to let Railway handle it
+# HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+#     CMD curl -f http://localhost/health.php || exit 1
 
 # Use custom entrypoint
 CMD ["/var/www/html/docker/entrypoint.sh"]
