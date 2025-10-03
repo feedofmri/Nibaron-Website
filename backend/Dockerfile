@@ -40,14 +40,11 @@ RUN docker-php-ext-install \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy composer files first for better Docker layer caching
-COPY composer.json composer.lock ./
+# Copy application files first
+COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress --prefer-dist
-
-# Copy application files
-COPY . .
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
