@@ -63,10 +63,10 @@ const Login = () => {
             transition={{ duration: 0.6 }}
             className="logo-section"
           >
-            <div className="logo">
+            <Link to="/" className="logo">
               <img src={nibaronIconWhite} alt="Nibaron Logo" className="nibaron-logo" />
               <span>Nibaron</span>
-            </div>
+            </Link>
             <h1 className="branding-title">
               Welcome Back to<br />
               Agriculture Hub
@@ -108,8 +108,10 @@ const Login = () => {
         >
           {/* Mobile Logo */}
           <div className="mobile-logo">
-            <img src={nibaronIconWhite} alt="Nibaron Logo" className="nibaron-logo" />
-            <span>Nibaron</span>
+            <Link to="/" className="mobile-logo-link">
+              <img src={nibaronIconWhite} alt="Nibaron Logo" className="nibaron-logo" />
+              <span>Nibaron</span>
+            </Link>
           </div>
 
           {/* Header */}

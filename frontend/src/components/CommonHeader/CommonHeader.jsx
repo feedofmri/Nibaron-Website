@@ -109,13 +109,13 @@ const CommonHeader = () => {
     <header className="common-header">
       <div className="header-container">
         {/* Logo */}
-        <div className="brand-logo">
+        <Link to="/" className="brand-logo">
           <img src={nibaronIcon} alt="Nibaron Bazaar" className="logo-image" />
           <div className="brand-text">
             <span className="brand-title">Nibaron</span>
             <span className="brand-subtitle">Bazaar</span>
           </div>
-        </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="header-nav desktop-nav">

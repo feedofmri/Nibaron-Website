@@ -10,13 +10,13 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <div className="footer-brand">
-            <div className="footer-brand-logo">
+            <Link to="/" className="footer-brand-logo">
               <img src={nibaronIcon} alt="Nibaron Bazaar" className="footer-logo-image" />
               <div className="footer-brand-text">
                 <span className="footer-brand-title">Nibaron</span>
                 <span className="footer-brand-subtitle">Bazaar</span>
               </div>
-            </div>
+            </Link>
             <p className="brand-description">
               স্মার্ট কৃষি বাজার - Connecting farmers directly with consumers through AI-powered crop predictions and sustainable agriculture.
             </p>

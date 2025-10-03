@@ -349,9 +349,20 @@
   gap: 0.75rem;
 }
 
-/* Login Branding Specific - Same green theme as signup */
-.login-branding {
-  background: linear-gradient(135deg, #68911b 0%, #5a7b17 100%);
+/* Logo Link Styling - Make logos clickable */
+.logo,
+.mobile-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover,
+.mobile-logo-link:hover {
+  opacity: 0.8;
 }
 
 /* Desktop Responsive - Show left panel */
