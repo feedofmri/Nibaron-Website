@@ -6,7 +6,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CSS Custom Properties for Theme Support */
+/* CSS Custom Properties - Light Theme Only */
 :root {
   --color-background-primary: #fafaf6;
   --color-background-secondary: #f9f9f4;
@@ -24,18 +24,6 @@
   --glass-border: rgba(255, 255, 255, 0.3);
 }
 
-.dark {
-  --color-background-primary: #2a2e34;
-  --color-background-secondary: #1f2329;
-  --color-background-card: #3a3f47;
-  --color-text-primary: #f5f5f5;
-  --color-text-secondary: #b0b0b0;
-  --color-text-muted: #6e6e6e;
-  --color-border: #4a4e55;
-  --glass-light: rgba(58, 63, 71, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
-}
-
 /* Base Styles */
 * {
   box-sizing: border-box;
@@ -51,7 +39,6 @@ body {
   font-family: 'Inter', system-ui, sans-serif;
   background-color: var(--color-background-primary);
   color: var(--color-text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Glassmorphism Components */

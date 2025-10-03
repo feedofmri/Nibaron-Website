@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
@@ -11,81 +11,37 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    // Check localStorage first, then system preference
-    const savedTheme = localStorage.getItem('nibaron-theme');
-    if (savedTheme) return savedTheme;
+  // Always use light theme
+  const theme = 'light';
 
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
-
-  const [systemTheme, setSystemTheme] = useState(
-    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  );
-
-  // Listen for system theme changes
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-    const handleChange = (e) => {
-      setSystemTheme(e.matches ? 'dark' : 'light');
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-
-  // Apply theme to document
+  // Apply light theme to document on mount and cleanup on unmount
   useEffect(() => {
     const root = document.documentElement;
-    const effectiveTheme = theme === 'auto' ? systemTheme : theme;
 
-    // Remove previous theme classes
+    // Remove any existing theme classes
     root.classList.remove('light', 'dark');
 
-    // Add current theme class
-    root.classList.add(effectiveTheme);
+    // Always add light theme class
+    root.classList.add('light');
 
-    // Save to localStorage
-    localStorage.setItem('nibaron-theme', theme);
-  }, [theme, systemTheme]);
+    // Remove any theme-related localStorage items
+    localStorage.removeItem('nibaron-theme');
 
-  const toggleTheme = () => {
-    setTheme(prevTheme => {
-      switch (prevTheme) {
-        case 'light':
-          return 'dark';
-        case 'dark':
-          return 'auto';
-        case 'auto':
-          return 'light';
-        default:
-          return 'light';
-      }
-    });
-  };
-
-  const setThemeMode = (mode) => {
-    if (['light', 'dark', 'auto'].includes(mode)) {
-      setTheme(mode);
-    }
-  };
-
-  const getEffectiveTheme = () => {
-    return theme === 'auto' ? systemTheme : theme;
-  };
-
-  const isDarkMode = () => {
-    return getEffectiveTheme() === 'dark';
-  };
+    return () => {
+      // Cleanup: ensure light theme persists
+      root.classList.remove('dark');
+      root.classList.add('light');
+    };
+  }, []);
 
   const value = {
-    theme,
-    systemTheme,
-    effectiveTheme: getEffectiveTheme(),
-    isDarkMode: isDarkMode(),
-    toggleTheme,
-    setTheme: setThemeMode,
+    theme: 'light',
+    systemTheme: 'light',
+    effectiveTheme: 'light',
+    isDarkMode: () => false,
+    // Provide empty functions for compatibility but they won't do anything
+    toggleTheme: () => {},
+    setTheme: () => {},
   };
 
   return (

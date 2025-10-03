@@ -1,32 +1,17 @@
-// Theme configuration for Nibaron Bazaar
+// Theme configuration for Nibaron Bazaar - Light Theme Only
 export const themeConfig = {
   colors: {
-    light: {
-      background: {
-        primary: '#fafaf6',
-        secondary: '#f9f9f4',
-        card: '#ffffff',
-      },
-      text: {
-        primary: '#2a2e34',
-        secondary: '#6e6e6e',
-        muted: '#b0b0b0',
-      },
-      border: '#dcdcdc',
+    background: {
+      primary: '#fafaf6',
+      secondary: '#f9f9f4',
+      card: '#ffffff',
     },
-    dark: {
-      background: {
-        primary: '#2a2e34',
-        secondary: '#1f2329',
-        card: '#3a3f47',
-      },
-      text: {
-        primary: '#f5f5f5',
-        secondary: '#b0b0b0',
-        muted: '#6e6e6e',
-      },
-      border: '#4a4e55',
+    text: {
+      primary: '#2a2e34',
+      secondary: '#6e6e6e',
+      muted: '#b0b0b0',
     },
+    border: '#dcdcdc',
     brand: {
       primary: '#68911b',
       accent: '#eab020',
@@ -49,41 +34,54 @@ export const themeConfig = {
       subheading: '22px',
       body: '16px',
       small: '14px',
-      tiny: '12px',
+      caption: '12px',
+    },
+    weight: {
+      light: 300,
+      normal: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
+      extrabold: 800,
+    },
+    lineHeight: {
+      tight: 1.25,
+      normal: 1.5,
+      relaxed: 1.75,
     }
   },
   spacing: {
-    scale: [4, 8, 16, 24, 32, 48, 64, 96, 128],
-    grid: {
-      desktop: 1440,
-      tablet: 1024,
-      mobile: 375,
-      padding: {
-        desktop: 80,
-        tablet: 60,
-        mobile: 24,
-      }
-    }
+    xs: '4px',
+    sm: '8px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+    xxl: '48px',
   },
-  animation: {
+  borderRadius: {
+    sm: '4px',
+    md: '8px',
+    lg: '12px',
+    xl: '16px',
+    full: '9999px',
+  },
+  shadows: {
+    sm: '0 1px 2px rgba(0, 0, 0, 0.05)',
+    md: '0 4px 6px rgba(0, 0, 0, 0.07)',
+    lg: '0 10px 15px rgba(0, 0, 0, 0.1)',
+    xl: '0 20px 25px rgba(0, 0, 0, 0.1)',
+    glass: '0 8px 32px rgba(0, 0, 0, 0.1)',
+  },
+  animations: {
     duration: {
-      fast: 200,
-      normal: 300,
-      slow: 500,
+      fast: '150ms',
+      normal: '300ms',
+      slow: '500ms',
     },
     easing: {
       smooth: 'cubic-bezier(0.4, 0, 0.2, 1)',
       bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
     }
-  },
-  breakpoints: {
-    xs: 475,
-    sm: 640,
-    md: 768,
-    lg: 1024,
-    xl: 1280,
-    '2xl': 1536,
-    '3xl': 1600,
   }
 };
 
