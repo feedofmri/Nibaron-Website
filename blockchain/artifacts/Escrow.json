@@ -1,0 +1,684 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"adminRefund(uint256)": "4c48ede7",
+			"buy(uint256,uint256)": "d6febde8",
+			"buyerConfirmReceived(uint256)": "4d397fd5",
+			"feeBps()": "24a9d853",
+			"feesAccrued()": "94db0595",
+			"nextOrderId()": "2a58b330",
+			"nextProductId()": "4de91a63",
+			"orders(uint256)": "a85c38ef",
+			"owner()": "8da5cb5b",
+			"products(uint256)": "7acc0b20",
+			"quote(uint256,uint256)": "315f1a41",
+			"sellerCancel(uint256)": "301e8a05",
+			"transferOwnership(address)": "f2fde38b"
+		}
+	},
+	"abi": [
+		{
+			"inputs": [],
+			"name": "BadQuantity",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "InactiveProduct",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "NotBuyer",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "NotCancellable",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "NotPlaced",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "NotRefundable",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "NotSeller",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "OnlyOwner",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "Reentrancy",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "WrongValue",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "ZeroAddress",
+			"type": "error"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "OrderCancelled",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "buyer",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "seller",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "paidToSeller",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "fee",
+					"type": "uint256"
+				}
+			],
+			"name": "OrderCompleted",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				},
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "buyer",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "seller",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "quantity",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "unitPriceWei",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "totalWei",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint96",
+					"name": "feeBps",
+					"type": "uint96"
+				}
+			],
+			"name": "OrderPlaced",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "buyer",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "refundWei",
+					"type": "uint256"
+				}
+			],
+			"name": "OrderRefunded",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "previousOwner",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "newOwner",
+					"type": "address"
+				}
+			],
+			"name": "OwnershipTransferred",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "seller",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "string",
+					"name": "name",
+					"type": "string"
+				},
+				{
+					"indexed": false,
+					"internalType": "string",
+					"name": "unit",
+					"type": "string"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "unitPriceWei",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "qty",
+					"type": "uint256"
+				}
+			],
+			"name": "ProductListed",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "unitPriceWei",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "availableQty",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "bool",
+					"name": "active",
+					"type": "bool"
+				}
+			],
+			"name": "ProductUpdated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				},
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "buyer",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "seller",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "quantity",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "unitPriceWei",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "totalWei",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "string",
+					"name": "note",
+					"type": "string"
+				}
+			],
+			"name": "TransactionRecorded",
+			"type": "event"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "adminRefund",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "quantity",
+					"type": "uint256"
+				}
+			],
+			"name": "buy",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "buyerConfirmReceived",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "feeBps",
+			"outputs": [
+				{
+					"internalType": "uint96",
+					"name": "",
+					"type": "uint96"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "feesAccrued",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "nextOrderId",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "nextProductId",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "orders",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "id",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "buyer",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "seller",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "quantity",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "unitPriceWei",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "totalWei",
+					"type": "uint256"
+				},
+				{
+					"internalType": "enum OrderStatus",
+					"name": "status",
+					"type": "uint8"
+				},
+				{
+					"internalType": "uint64",
+					"name": "placedAt",
+					"type": "uint64"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "owner",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "products",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "seller",
+					"type": "address"
+				},
+				{
+					"internalType": "string",
+					"name": "name",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "unit",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "unitPriceWei",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "availableQty",
+					"type": "uint256"
+				},
+				{
+					"internalType": "bool",
+					"name": "active",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "quantity",
+					"type": "uint256"
+				}
+			],
+			"name": "quote",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "total",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "fee",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "payAmount",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "sellerCancel",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "newOwner",
+					"type": "address"
+				}
+			],
+			"name": "transferOwnership",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"stateMutability": "payable",
+			"type": "receive"
+		}
+	]
+}

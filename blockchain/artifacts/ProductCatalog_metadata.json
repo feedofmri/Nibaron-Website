@@ -1,0 +1,688 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "NotSeller",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "OnlyOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "PriceZero",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "QtyZero",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ZeroAddress",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "orderId",
+						"type": "uint256"
+					}
+				],
+				"name": "OrderCancelled",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "orderId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "paidToSeller",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "fee",
+						"type": "uint256"
+					}
+				],
+				"name": "OrderCompleted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "orderId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "quantity",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "unitPriceWei",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "totalWei",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint96",
+						"name": "feeBps",
+						"type": "uint96"
+					}
+				],
+				"name": "OrderPlaced",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "orderId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "refundWei",
+						"type": "uint256"
+					}
+				],
+				"name": "OrderRefunded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "unit",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "unitPriceWei",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "qty",
+						"type": "uint256"
+					}
+				],
+				"name": "ProductListed",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "unitPriceWei",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "availableQty",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"name": "ProductUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "orderId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "quantity",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "unitPriceWei",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "totalWei",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "note",
+						"type": "string"
+					}
+				],
+				"name": "TransactionRecorded",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "feeBps",
+				"outputs": [
+					{
+						"internalType": "uint96",
+						"name": "",
+						"type": "uint96"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "feesAccrued",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "unit",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "unitPriceWei",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "qty",
+						"type": "uint256"
+					}
+				],
+				"name": "listProduct",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "nextOrderId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "nextProductId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "orders",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "quantity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "unitPriceWei",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalWei",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum OrderStatus",
+						"name": "status",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint64",
+						"name": "placedAt",
+						"type": "uint64"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					}
+				],
+				"name": "productInfo",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "unit",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "unitPriceWei",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "availableQty",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "products",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "unit",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "unitPriceWei",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "availableQty",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "newUnitPriceWei",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "newAvailableQty",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"name": "updateProduct",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/modules/ProductCatalog.sol": "ProductCatalog"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/common/Errors.sol": {
+			"keccak256": "0xdfa519189d0ad22337054b8fbe5ff9e44cfd969583ac4b261c2d1e0af8d29970",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://edefbbf24cf2f031c61032d2e07fc1b6a6c130c7c02262052257eba5f3f66e8e",
+				"dweb:/ipfs/QmXosop2rbRduTuHmScNPmGJ8Yph9NBW691e1TZz7m1UiG"
+			]
+		},
+		"contracts/common/Events.sol": {
+			"keccak256": "0xba9b1c0ae2ebab6a3c7f9a811bb40073e5d04bf6cb1a6c53a8c9742b98d085e6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://cccece4df06a441820012457c1095738ec360444262dac0e779f7ba684ca5c55",
+				"dweb:/ipfs/QmXEgjtKHLJLM7BhmhkhFnU28VyfqnCQ6W45L3ZL7y95rq"
+			]
+		},
+		"contracts/common/Ownable.sol": {
+			"keccak256": "0xb8dd7cd29a0100de3ced3a746c112296e7c16a32821daa46ac28f9febd17a702",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fbd23410b0015d191ab09e7635a15b881d0a0ff34777afd851695c8b7d3cbe0f",
+				"dweb:/ipfs/QmdEfVyAXdfcVvJXKofks2Pv4kQgY45DWrFggQKmSPTmDj"
+			]
+		},
+		"contracts/common/ReentrancyGuard.sol": {
+			"keccak256": "0xc8064eb006fe41405443a33bec0e146f089fe55ce832cca19ea30f4592cee133",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://cc9e9235c9ea51833d5a9f24cafd066e28269435133178915bbd61953ef1767e",
+				"dweb:/ipfs/QmPwEwHLjAUHS8vN9xcB4SdCxLwDpBjfq3pmVW1zforob8"
+			]
+		},
+		"contracts/common/Types.sol": {
+			"keccak256": "0xdcb7ef8da0dbf5bee1f2c93bad21e75003289ee9b757358ce22a8a4bfa5a456d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8f35a0dae926f6ae437c924483b436b834ee7f717910accbd743cde9422b745b",
+				"dweb:/ipfs/QmecsKiaLQANRfm3cFsX13xKsy66yLD4FRore86K1cxWb5"
+			]
+		},
+		"contracts/modules/ProductCatalog.sol": {
+			"keccak256": "0x25fd5bf6043d8c411b1347941731396658aace5d122d75919c91feaeac3e7eb2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c5224c95390c3b42c6df765239315fcd18c7d1900a61a16fd667f3136fc98c23",
+				"dweb:/ipfs/Qmca2D58MG41UMrzuP4KCcKK6efoafADtZ1WykAkUktfxV"
+			]
+		},
+		"contracts/storage/MarketStorage.sol": {
+			"keccak256": "0x5aec9e8269db7bd2a01a46253aee270781585e5caa45a2649af0854ec3d853d3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1b5c4a5559f6fdef6104061aa84c75adce2e8bfe598ec910c7bc77bddabceb79",
+				"dweb:/ipfs/Qmf9ThtdFxc6uCWqMv7kYKX5pLuH9SaE87vuNubU2PCZxd"
+			]
+		}
+	},
+	"version": 1
+}

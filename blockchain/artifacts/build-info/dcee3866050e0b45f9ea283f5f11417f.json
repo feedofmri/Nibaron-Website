@@ -1,0 +1,666 @@
+{
+	"id": "dcee3866050e0b45f9ea283f5f11417f",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/common/ReentrancyGuard.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.24;\r\n\r\nimport {Reentrancy} from \"./Errors.sol\";\r\n\r\nabstract contract ReentrancyGuard {\r\n    uint256 private _status;\r\n\r\n    modifier nonReentrant() {\r\n        if (_status == 1) revert Reentrancy();\r\n        _status = 1;\r\n        _;\r\n        _status = 0;\r\n    }\r\n}\r\n"
+			},
+			"contracts/common/Errors.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.24;\r\n\r\nerror OnlyOwner();\r\nerror ZeroAddress();\r\n\r\nerror NotSeller();\r\nerror NotBuyer();\r\nerror InactiveProduct();\r\nerror BadQuantity();\r\nerror PriceZero();\r\nerror QtyZero();\r\nerror WrongValue();\r\n\r\nerror NotPlaced();\r\nerror NotCancellable();\r\nerror NotRefundable();\r\n\r\nerror Reentrancy();\r\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/common/ReentrancyGuard.sol": {
+				"ReentrancyGuard": {
+					"abi": [],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/common/ReentrancyGuard.sol\":\"ReentrancyGuard\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/common/Errors.sol\":{\"keccak256\":\"0xdfa519189d0ad22337054b8fbe5ff9e44cfd969583ac4b261c2d1e0af8d29970\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://edefbbf24cf2f031c61032d2e07fc1b6a6c130c7c02262052257eba5f3f66e8e\",\"dweb:/ipfs/QmXosop2rbRduTuHmScNPmGJ8Yph9NBW691e1TZz7m1UiG\"]},\"contracts/common/ReentrancyGuard.sol\":{\"keccak256\":\"0xc8064eb006fe41405443a33bec0e146f089fe55ce832cca19ea30f4592cee133\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cc9e9235c9ea51833d5a9f24cafd066e28269435133178915bbd61953ef1767e\",\"dweb:/ipfs/QmPwEwHLjAUHS8vN9xcB4SdCxLwDpBjfq3pmVW1zforob8\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [
+							{
+								"astId": 33,
+								"contract": "contracts/common/ReentrancyGuard.sol:ReentrancyGuard",
+								"label": "_status",
+								"offset": 0,
+								"slot": "0",
+								"type": "t_uint256"
+							}
+						],
+						"types": {
+							"t_uint256": {
+								"encoding": "inplace",
+								"label": "uint256",
+								"numberOfBytes": "32"
+							}
+						}
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/common/Errors.sol": {
+				"ast": {
+					"absolutePath": "contracts/common/Errors.sol",
+					"exportedSymbols": {
+						"BadQuantity": [
+							13
+						],
+						"InactiveProduct": [
+							11
+						],
+						"NotBuyer": [
+							9
+						],
+						"NotCancellable": [
+							23
+						],
+						"NotPlaced": [
+							21
+						],
+						"NotRefundable": [
+							25
+						],
+						"NotSeller": [
+							7
+						],
+						"OnlyOwner": [
+							3
+						],
+						"PriceZero": [
+							15
+						],
+						"QtyZero": [
+							17
+						],
+						"Reentrancy": [
+							27
+						],
+						"WrongValue": [
+							19
+						],
+						"ZeroAddress": [
+							5
+						]
+					},
+					"id": 28,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".24"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:24:0"
+						},
+						{
+							"errorSelector": "5fc483c5",
+							"id": 3,
+							"name": "OnlyOwner",
+							"nameLocation": "67:9:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 2,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "76:2:0"
+							},
+							"src": "61:18:0"
+						},
+						{
+							"errorSelector": "d92e233d",
+							"id": 5,
+							"name": "ZeroAddress",
+							"nameLocation": "87:11:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 4,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "98:2:0"
+							},
+							"src": "81:20:0"
+						},
+						{
+							"errorSelector": "5ec82351",
+							"id": 7,
+							"name": "NotSeller",
+							"nameLocation": "111:9:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 6,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "120:2:0"
+							},
+							"src": "105:18:0"
+						},
+						{
+							"errorSelector": "472e017e",
+							"id": 9,
+							"name": "NotBuyer",
+							"nameLocation": "131:8:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 8,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "139:2:0"
+							},
+							"src": "125:17:0"
+						},
+						{
+							"errorSelector": "a10e397d",
+							"id": 11,
+							"name": "InactiveProduct",
+							"nameLocation": "150:15:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 10,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "165:2:0"
+							},
+							"src": "144:24:0"
+						},
+						{
+							"errorSelector": "888e58a8",
+							"id": 13,
+							"name": "BadQuantity",
+							"nameLocation": "176:11:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 12,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "187:2:0"
+							},
+							"src": "170:20:0"
+						},
+						{
+							"errorSelector": "e528e11e",
+							"id": 15,
+							"name": "PriceZero",
+							"nameLocation": "198:9:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 14,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "207:2:0"
+							},
+							"src": "192:18:0"
+						},
+						{
+							"errorSelector": "d481977e",
+							"id": 17,
+							"name": "QtyZero",
+							"nameLocation": "218:7:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 16,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "225:2:0"
+							},
+							"src": "212:16:0"
+						},
+						{
+							"errorSelector": "98d4901c",
+							"id": 19,
+							"name": "WrongValue",
+							"nameLocation": "236:10:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 18,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "246:2:0"
+							},
+							"src": "230:19:0"
+						},
+						{
+							"errorSelector": "a5eeaea3",
+							"id": 21,
+							"name": "NotPlaced",
+							"nameLocation": "259:9:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 20,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "268:2:0"
+							},
+							"src": "253:18:0"
+						},
+						{
+							"errorSelector": "67909b15",
+							"id": 23,
+							"name": "NotCancellable",
+							"nameLocation": "279:14:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 22,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "293:2:0"
+							},
+							"src": "273:23:0"
+						},
+						{
+							"errorSelector": "3742d1f6",
+							"id": 25,
+							"name": "NotRefundable",
+							"nameLocation": "304:13:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 24,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "317:2:0"
+							},
+							"src": "298:22:0"
+						},
+						{
+							"errorSelector": "ab143c06",
+							"id": 27,
+							"name": "Reentrancy",
+							"nameLocation": "330:10:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 26,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "340:2:0"
+							},
+							"src": "324:19:0"
+						}
+					],
+					"src": "33:312:0"
+				},
+				"id": 0
+			},
+			"contracts/common/ReentrancyGuard.sol": {
+				"ast": {
+					"absolutePath": "contracts/common/ReentrancyGuard.sol",
+					"exportedSymbols": {
+						"Reentrancy": [
+							27
+						],
+						"ReentrancyGuard": [
+							53
+						]
+					},
+					"id": 54,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 29,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".24"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:24:1"
+						},
+						{
+							"absolutePath": "contracts/common/Errors.sol",
+							"file": "./Errors.sol",
+							"id": 31,
+							"nameLocation": "-1:-1:-1",
+							"nodeType": "ImportDirective",
+							"scope": 54,
+							"sourceUnit": 28,
+							"src": "61:40:1",
+							"symbolAliases": [
+								{
+									"foreign": {
+										"id": 30,
+										"name": "Reentrancy",
+										"nodeType": "Identifier",
+										"overloadedDeclarations": [],
+										"referencedDeclaration": 27,
+										"src": "69:10:1",
+										"typeDescriptions": {}
+									},
+									"nameLocation": "-1:-1:-1"
+								}
+							],
+							"unitAlias": ""
+						},
+						{
+							"abstract": true,
+							"baseContracts": [],
+							"canonicalName": "ReentrancyGuard",
+							"contractDependencies": [],
+							"contractKind": "contract",
+							"fullyImplemented": true,
+							"id": 53,
+							"linearizedBaseContracts": [
+								53
+							],
+							"name": "ReentrancyGuard",
+							"nameLocation": "123:15:1",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"constant": false,
+									"id": 33,
+									"mutability": "mutable",
+									"name": "_status",
+									"nameLocation": "162:7:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 53,
+									"src": "146:23:1",
+									"stateVariable": true,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 32,
+										"name": "uint256",
+										"nodeType": "ElementaryTypeName",
+										"src": "146:7:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "private"
+								},
+								{
+									"body": {
+										"id": 51,
+										"nodeType": "Block",
+										"src": "202:112:1",
+										"statements": [
+											{
+												"condition": {
+													"commonType": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													},
+													"id": 37,
+													"isConstant": false,
+													"isLValue": false,
+													"isPure": false,
+													"lValueRequested": false,
+													"leftExpression": {
+														"id": 35,
+														"name": "_status",
+														"nodeType": "Identifier",
+														"overloadedDeclarations": [],
+														"referencedDeclaration": 33,
+														"src": "217:7:1",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"nodeType": "BinaryOperation",
+													"operator": "==",
+													"rightExpression": {
+														"hexValue": "31",
+														"id": 36,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": true,
+														"kind": "number",
+														"lValueRequested": false,
+														"nodeType": "Literal",
+														"src": "228:1:1",
+														"typeDescriptions": {
+															"typeIdentifier": "t_rational_1_by_1",
+															"typeString": "int_const 1"
+														},
+														"value": "1"
+													},
+													"src": "217:12:1",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bool",
+														"typeString": "bool"
+													}
+												},
+												"id": 41,
+												"nodeType": "IfStatement",
+												"src": "213:37:1",
+												"trueBody": {
+													"errorCall": {
+														"arguments": [],
+														"expression": {
+															"argumentTypes": [],
+															"id": 38,
+															"name": "Reentrancy",
+															"nodeType": "Identifier",
+															"overloadedDeclarations": [],
+															"referencedDeclaration": 27,
+															"src": "238:10:1",
+															"typeDescriptions": {
+																"typeIdentifier": "t_function_error_pure$__$returns$_t_error_$",
+																"typeString": "function () pure returns (error)"
+															}
+														},
+														"id": 39,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": false,
+														"kind": "functionCall",
+														"lValueRequested": false,
+														"nameLocations": [],
+														"names": [],
+														"nodeType": "FunctionCall",
+														"src": "238:12:1",
+														"tryCall": false,
+														"typeDescriptions": {
+															"typeIdentifier": "t_error",
+															"typeString": "error"
+														}
+													},
+													"id": 40,
+													"nodeType": "RevertStatement",
+													"src": "231:19:1"
+												}
+											},
+											{
+												"expression": {
+													"id": 44,
+													"isConstant": false,
+													"isLValue": false,
+													"isPure": false,
+													"lValueRequested": false,
+													"leftHandSide": {
+														"id": 42,
+														"name": "_status",
+														"nodeType": "Identifier",
+														"overloadedDeclarations": [],
+														"referencedDeclaration": 33,
+														"src": "261:7:1",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"nodeType": "Assignment",
+													"operator": "=",
+													"rightHandSide": {
+														"hexValue": "31",
+														"id": 43,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": true,
+														"kind": "number",
+														"lValueRequested": false,
+														"nodeType": "Literal",
+														"src": "271:1:1",
+														"typeDescriptions": {
+															"typeIdentifier": "t_rational_1_by_1",
+															"typeString": "int_const 1"
+														},
+														"value": "1"
+													},
+													"src": "261:11:1",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"id": 45,
+												"nodeType": "ExpressionStatement",
+												"src": "261:11:1"
+											},
+											{
+												"id": 46,
+												"nodeType": "PlaceholderStatement",
+												"src": "283:1:1"
+											},
+											{
+												"expression": {
+													"id": 49,
+													"isConstant": false,
+													"isLValue": false,
+													"isPure": false,
+													"lValueRequested": false,
+													"leftHandSide": {
+														"id": 47,
+														"name": "_status",
+														"nodeType": "Identifier",
+														"overloadedDeclarations": [],
+														"referencedDeclaration": 33,
+														"src": "295:7:1",
+														"typeDescriptions": {
+															"typeIdentifier": "t_uint256",
+															"typeString": "uint256"
+														}
+													},
+													"nodeType": "Assignment",
+													"operator": "=",
+													"rightHandSide": {
+														"hexValue": "30",
+														"id": 48,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": true,
+														"kind": "number",
+														"lValueRequested": false,
+														"nodeType": "Literal",
+														"src": "305:1:1",
+														"typeDescriptions": {
+															"typeIdentifier": "t_rational_0_by_1",
+															"typeString": "int_const 0"
+														},
+														"value": "0"
+													},
+													"src": "295:11:1",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"id": 50,
+												"nodeType": "ExpressionStatement",
+												"src": "295:11:1"
+											}
+										]
+									},
+									"id": 52,
+									"name": "nonReentrant",
+									"nameLocation": "187:12:1",
+									"nodeType": "ModifierDefinition",
+									"parameters": {
+										"id": 34,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "199:2:1"
+									},
+									"src": "178:136:1",
+									"virtual": false,
+									"visibility": "internal"
+								}
+							],
+							"scope": 54,
+							"src": "105:212:1",
+							"usedErrors": [],
+							"usedEvents": []
+						}
+					],
+					"src": "33:286:1"
+				},
+				"id": 1
+			}
+		}
+	}
+}
