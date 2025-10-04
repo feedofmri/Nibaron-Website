@@ -21,6 +21,24 @@
 
 </div>
 
+---
+
+## 🎬 Platform Showcase
+
+<div align="center">
+
+[![Nibaron Platform Demo](https://img.youtube.com/vi/5-okao60db4/maxresdefault.jpg)](https://youtu.be/5-okao60db4)
+
+*Watch our platform in action - See how Nibaron empowers farmers with AI-driven climate insights*
+
+</div>
+
+<div align="center">
+
+**📱 [Mobile App Demo](https://youtu.be/VCbtS7w1erg)**
+
+</div>
+
 ## 🌾 Overview
 
 Nibaron is an innovative ClimateAI platform designed specifically for farmers in Bangladesh and globally. Unlike traditional weather forecasting tools, Nibaron provides crop-specific, actionable recommendations that help farmers make informed decisions about irrigation, fertilization, and crop protection.
