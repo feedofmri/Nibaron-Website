@@ -35,7 +35,7 @@
 
 <div align="center">
 
-**📱 [Mobile App Demo](https://youtu.be/VCbtS7w1erg)**
+**[Mobile App Demo](https://youtu.be/VCbtS7w1erg)**
 
 </div>
 
