@@ -1,0 +1,53 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/common/ReentrancyGuard.sol": "ReentrancyGuard"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/common/Errors.sol": {
+			"keccak256": "0xdfa519189d0ad22337054b8fbe5ff9e44cfd969583ac4b261c2d1e0af8d29970",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://edefbbf24cf2f031c61032d2e07fc1b6a6c130c7c02262052257eba5f3f66e8e",
+				"dweb:/ipfs/QmXosop2rbRduTuHmScNPmGJ8Yph9NBW691e1TZz7m1UiG"
+			]
+		},
+		"contracts/common/ReentrancyGuard.sol": {
+			"keccak256": "0xc8064eb006fe41405443a33bec0e146f089fe55ce832cca19ea30f4592cee133",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://cc9e9235c9ea51833d5a9f24cafd066e28269435133178915bbd61953ef1767e",
+				"dweb:/ipfs/QmPwEwHLjAUHS8vN9xcB4SdCxLwDpBjfq3pmVW1zforob8"
+			]
+		}
+	},
+	"version": 1
+}

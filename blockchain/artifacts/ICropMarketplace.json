@@ -1,0 +1,340 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"adminRefund(uint256)": "4c48ede7",
+			"buy(uint256,uint256)": "d6febde8",
+			"buyerConfirmReceived(uint256)": "4d397fd5",
+			"listProduct(string,string,uint256,uint256)": "be126a94",
+			"productInfo(uint256)": "bb119f6e",
+			"quote(uint256,uint256)": "315f1a41",
+			"recordOffchainSale(uint256,address,uint256,uint256,string)": "56104161",
+			"sellerCancel(uint256)": "301e8a05",
+			"setFeeBps(uint96)": "b7f1564e",
+			"updateProduct(uint256,uint256,uint256,bool)": "faaac390",
+			"withdrawFees(address,uint256)": "ad3b1b47"
+		}
+	},
+	"abi": [
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "adminRefund",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "quantity",
+					"type": "uint256"
+				}
+			],
+			"name": "buy",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "buyerConfirmReceived",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "name",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "unit",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "unitPriceWei",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "qty",
+					"type": "uint256"
+				}
+			],
+			"name": "listProduct",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				}
+			],
+			"name": "productInfo",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "seller",
+					"type": "address"
+				},
+				{
+					"internalType": "string",
+					"name": "name",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "unit",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "unitPriceWei",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "availableQty",
+					"type": "uint256"
+				},
+				{
+					"internalType": "bool",
+					"name": "active",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "quantity",
+					"type": "uint256"
+				}
+			],
+			"name": "quote",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "total",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "fee",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "payAmount",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "buyer",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "quantity",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "unitPriceWei",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "note",
+					"type": "string"
+				}
+			],
+			"name": "recordOffchainSale",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "sellerCancel",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint96",
+					"name": "newFeeBps",
+					"type": "uint96"
+				}
+			],
+			"name": "setFeeBps",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "newUnitPriceWei",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "newAvailableQty",
+					"type": "uint256"
+				},
+				{
+					"internalType": "bool",
+					"name": "active",
+					"type": "bool"
+				}
+			],
+			"name": "updateProduct",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address payable",
+					"name": "to",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "amount",
+					"type": "uint256"
+				}
+			],
+			"name": "withdrawFees",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}

@@ -1,0 +1,291 @@
+{
+	"id": "d57f5d208e2ad85ca450fc5aadf0e4c6",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/common/Errors.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.24;\r\n\r\nerror OnlyOwner();\r\nerror ZeroAddress();\r\n\r\nerror NotSeller();\r\nerror NotBuyer();\r\nerror InactiveProduct();\r\nerror BadQuantity();\r\nerror PriceZero();\r\nerror QtyZero();\r\nerror WrongValue();\r\n\r\nerror NotPlaced();\r\nerror NotCancellable();\r\nerror NotRefundable();\r\n\r\nerror Reentrancy();\r\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"sources": {
+			"contracts/common/Errors.sol": {
+				"ast": {
+					"absolutePath": "contracts/common/Errors.sol",
+					"exportedSymbols": {
+						"BadQuantity": [
+							13
+						],
+						"InactiveProduct": [
+							11
+						],
+						"NotBuyer": [
+							9
+						],
+						"NotCancellable": [
+							23
+						],
+						"NotPlaced": [
+							21
+						],
+						"NotRefundable": [
+							25
+						],
+						"NotSeller": [
+							7
+						],
+						"OnlyOwner": [
+							3
+						],
+						"PriceZero": [
+							15
+						],
+						"QtyZero": [
+							17
+						],
+						"Reentrancy": [
+							27
+						],
+						"WrongValue": [
+							19
+						],
+						"ZeroAddress": [
+							5
+						]
+					},
+					"id": 28,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".24"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:24:0"
+						},
+						{
+							"errorSelector": "5fc483c5",
+							"id": 3,
+							"name": "OnlyOwner",
+							"nameLocation": "67:9:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 2,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "76:2:0"
+							},
+							"src": "61:18:0"
+						},
+						{
+							"errorSelector": "d92e233d",
+							"id": 5,
+							"name": "ZeroAddress",
+							"nameLocation": "87:11:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 4,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "98:2:0"
+							},
+							"src": "81:20:0"
+						},
+						{
+							"errorSelector": "5ec82351",
+							"id": 7,
+							"name": "NotSeller",
+							"nameLocation": "111:9:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 6,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "120:2:0"
+							},
+							"src": "105:18:0"
+						},
+						{
+							"errorSelector": "472e017e",
+							"id": 9,
+							"name": "NotBuyer",
+							"nameLocation": "131:8:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 8,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "139:2:0"
+							},
+							"src": "125:17:0"
+						},
+						{
+							"errorSelector": "a10e397d",
+							"id": 11,
+							"name": "InactiveProduct",
+							"nameLocation": "150:15:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 10,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "165:2:0"
+							},
+							"src": "144:24:0"
+						},
+						{
+							"errorSelector": "888e58a8",
+							"id": 13,
+							"name": "BadQuantity",
+							"nameLocation": "176:11:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 12,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "187:2:0"
+							},
+							"src": "170:20:0"
+						},
+						{
+							"errorSelector": "e528e11e",
+							"id": 15,
+							"name": "PriceZero",
+							"nameLocation": "198:9:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 14,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "207:2:0"
+							},
+							"src": "192:18:0"
+						},
+						{
+							"errorSelector": "d481977e",
+							"id": 17,
+							"name": "QtyZero",
+							"nameLocation": "218:7:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 16,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "225:2:0"
+							},
+							"src": "212:16:0"
+						},
+						{
+							"errorSelector": "98d4901c",
+							"id": 19,
+							"name": "WrongValue",
+							"nameLocation": "236:10:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 18,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "246:2:0"
+							},
+							"src": "230:19:0"
+						},
+						{
+							"errorSelector": "a5eeaea3",
+							"id": 21,
+							"name": "NotPlaced",
+							"nameLocation": "259:9:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 20,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "268:2:0"
+							},
+							"src": "253:18:0"
+						},
+						{
+							"errorSelector": "67909b15",
+							"id": 23,
+							"name": "NotCancellable",
+							"nameLocation": "279:14:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 22,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "293:2:0"
+							},
+							"src": "273:23:0"
+						},
+						{
+							"errorSelector": "3742d1f6",
+							"id": 25,
+							"name": "NotRefundable",
+							"nameLocation": "304:13:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 24,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "317:2:0"
+							},
+							"src": "298:22:0"
+						},
+						{
+							"errorSelector": "ab143c06",
+							"id": 27,
+							"name": "Reentrancy",
+							"nameLocation": "330:10:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 26,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "340:2:0"
+							},
+							"src": "324:19:0"
+						}
+					],
+					"src": "33:312:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
